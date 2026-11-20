@@ -1,0 +1,2806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="HydraFit" />
+  <meta name="theme-color" content="#fdf2f6" />
+  <title>HydraFit</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Baby pink, warm maroon, and warm beige design tokens */
+    :root {
+      --pink-bg: #fdf2f6;
+      --pink-soft: #fbcfe8;
+      --pink-accent: #f472b6;
+      --maroon-deep: #9d174d;
+      --beige-bg: #faf6f0;
+      --beige-card: #f3ece2;
+      --beige-ink: #854d0e;
+      --ink-main: #3b232d;
+      --ink-muted: #7c5866;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(180deg, var(--pink-bg) 0%, var(--beige-bg) 55%, var(--beige-card) 100%);
+      color: var(--ink-main);
+      overflow-x: hidden;
+    }
+
+    .hydrafi-shell {
+      width: 100%;
+      max-width: 460px;
+      margin: 0 auto;
+      padding: 16px 16px 104px;
+    }
+
+    .hydrafi-card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid #f0d7e3;
+      border-radius: 22px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 24px rgba(157, 23, 77, 0.06);
+    }
+
+    .hydrafi-beige-box {
+      background: var(--beige-bg);
+      border: 1px solid #e7dccb;
+      border-radius: 16px;
+    }
+
+    .hydrafi-pill-btn {
+      transition: transform 0.12s ease, background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+      cursor: pointer;
+    }
+
+    .hydrafi-pill-btn:active {
+      transform: scale(0.97);
+    }
+
+    .ring-circle {
+      transition: stroke-dashoffset 0.45s ease;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+    }
+
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .hydrafi-logo-float {
+      animation: gentleFloat 3s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Entry / Login Gate Screen -->
+  <section id="welcome-gate-screen" class="min-h-screen w-full flex items-center justify-center px-4 py-8" aria-label="HydraFit Entry Gate">
+    <div class="w-full max-w-[420px] hydrafi-card !mb-0 text-center space-y-5">
+      <div class="flex flex-col items-center">
+        <div class="hydrafi-logo-float w-24 h-24 rounded-3xl bg-gradient-to-br from-[#fdf2f6] via-[#fbcfe8] to-[#f3ece2] border-2 border-[#f472b6]/60 shadow-md flex items-center justify-center mb-3">
+          <!-- Cute Custom HydraFit SVG Logo: Water Droplet with Soft Heart & Glow Sparkle -->
+          <svg class="w-16 h-16" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="40" cy="42" r="29" stroke="#f472b6" stroke-width="2.2" stroke-dasharray="5 5" opacity="0.7" />
+            <path d="M40 13C28.5 27.5 22 36.5 22 45.5C22 55.7 29.9 64 40 64C50.1 64 58 55.7 58 45.5C58 36.5 51.5 27.5 40 13Z" fill="#f472b6" stroke="#9d174d" stroke-width="2.5" stroke-linejoin="round" />
+            <path d="M31 43C31 37.5 34.5 32 39.2 25.2" stroke="#fdf2f6" stroke-width="3" stroke-linecap="round" opacity="0.85" />
+            <!-- Soft heart inside droplet -->
+            <path d="M40 53.5C40 53.5 32.5 48.6 32.5 43.6C32.5 41.3 34.3 39.5 36.5 39.5C38 39.5 39.3 40.3 40 41.5C40.7 40.3 42 39.5 43.5 39.5C45.7 39.5 47.5 41.3 47.5 43.6C47.5 48.6 40 53.5 40 53.5Z" fill="#fdf2f6" stroke="#9d174d" stroke-width="1.8" stroke-linejoin="round" />
+            <!-- Glow sparkle -->
+            <path d="M58 16L59.7 20.3L64 22L59.7 23.7L58 28L56.3 23.7L52 22L56.3 20.3L58 16Z" fill="#9d174d" />
+            <circle cx="20" cy="24" r="2.5" fill="#854d0e" opacity="0.7" />
+          </svg>
+        </div>
+
+        <!-- Bold HydraFit title with NOTHING written under or after it -->
+        <h1 class="text-3xl font-extrabold tracking-tight text-[#9d174d]">HydraFit</h1>
+      </div>
+
+      <!-- Name input field right below title inside a form supporting Enter submission -->
+      <form id="gate-login-form" class="p-4 hydrafi-beige-box text-left space-y-3" novalidate>
+        <div>
+          <label for="gate-name-input" class="block text-xs font-extrabold text-[#854d0e] mb-1">
+            Your Name
+          </label>
+          <input id="gate-name-input" type="text" maxlength="40" autocomplete="name" placeholder="Enter your name (optional)" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#e7dccb] text-sm font-semibold text-[#3b232d] focus:outline-none focus:border-[#f472b6]" />
+        </div>
+
+        <button id="enter-hydrafi-btn" type="submit" class="hydrafi-pill-btn w-full py-3 px-4 rounded-xl bg-[#f472b6] hover:bg-[#e05aa0] text-white text-sm font-extrabold shadow-sm">
+          Enter
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Top In-App Alert Banner -->
+  <div id="top-alert-banner" class="hidden fixed top-3 left-0 right-0 z-50 px-3 pointer-events-none">
+    <div id="top-alert-card" class="pointer-events-auto max-w-[436px] mx-auto rounded-2xl p-3.5 shadow-xl border border-[#f472b6] bg-[#9d174d] text-white flex items-start gap-3">
+      <div class="w-9 h-9 rounded-xl bg-[#fbcfe8] text-[#9d174d] flex items-center justify-center shrink-0 mt-0.5">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.4-1.4A2 2 0 0118 14.2V11a6 6 0 10-12 0v3.2a2 2 0 01-.6 1.4L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+        </svg>
+      </div>
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-[10px] font-extrabold uppercase tracking-wider text-[#fbcfe8]">HydraFit Alert</span>
+          <button id="dismiss-alert-btn" type="button" class="text-[11px] font-bold text-[#fbcfe8] underline cursor-pointer">Dismiss</button>
+        </div>
+        <p id="top-alert-title" class="text-sm font-bold text-white mt-0.5">Hydration Reminder</p>
+        <p id="top-alert-message" class="text-xs text-[#fdf2f6] mt-0.5 leading-relaxed">Time to drink water.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main App Shell -->
+  <main id="hydrafi-main-app" class="hydrafi-shell hidden">
+
+    <!-- Top Header Bar with Active User Name & Edit Name Button -->
+    <header class="flex items-center justify-between gap-2 mb-4 pt-1">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <span class="w-9 h-9 rounded-xl bg-[#fbcfe8] border border-[#f472b6]/60 text-[#9d174d] flex items-center justify-center shrink-0">
+          <svg class="w-6 h-6" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M40 13C28.5 27.5 22 36.5 22 45.5C22 55.7 29.9 64 40 64C50.1 64 58 55.7 58 45.5C58 36.5 51.5 27.5 40 13Z" fill="#f472b6" stroke="#9d174d" stroke-width="3" stroke-linejoin="round" />
+            <path d="M40 53.5C40 53.5 32.5 48.6 32.5 43.6C32.5 41.3 34.3 39.5 36.5 39.5C38 39.5 39.3 40.3 40 41.5C40.7 40.3 42 39.5 43.5 39.5C45.7 39.5 47.5 41.3 47.5 43.6C47.5 48.6 40 53.5 40 53.5Z" fill="#fdf2f6" />
+          </svg>
+        </span>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2">
+            <span class="text-lg font-extrabold tracking-tight text-[#9d174d]">HydraFit</span>
+            <span id="header-active-user-name" class="px-2.5 py-0.5 rounded-full bg-[#f3ece2] border border-[#e7dccb] text-[#854d0e] text-xs font-extrabold truncate max-w-[140px]">Guest</span>
+          </div>
+          <p id="header-date-label" class="text-[11px] font-medium text-[#7c5866] truncate">Friday</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1.5 shrink-0">
+        <button id="edit-name-btn" type="button" class="hydrafi-pill-btn px-3 py-2 rounded-xl bg-[#fbcfe8] hover:bg-[#f8b8de] text-[#9d174d] text-xs font-bold">
+          Edit Name
+        </button>
+        <button id="test-alert-btn" type="button" class="hydrafi-pill-btn px-3 py-2 rounded-xl bg-[#f472b6] hover:bg-[#db5c9e] text-white text-xs font-bold shadow-sm">
+          Alert
+        </button>
+      </div>
+    </header>
+
+    <!-- Inline Edit Name Box (Toggled by Edit Name button) -->
+    <div id="edit-name-drawer" class="hidden hydrafi-card !p-3.5 !mb-4">
+      <label for="inline-name-input" class="block text-xs font-extrabold text-[#854d0e] mb-1.5">Active User Name</label>
+      <div class="flex items-center gap-2">
+        <input id="inline-name-input" type="text" maxlength="40" placeholder="Enter your name" class="flex-1 px-3 py-2 rounded-xl bg-[#faf6f0] border border-[#e7dccb] text-xs font-semibold text-[#3b232d] focus:outline-none focus:border-[#f472b6]" />
+        <button id="save-inline-name-btn" type="button" class="hydrafi-pill-btn px-3.5 py-2 rounded-xl bg-[#9d174d] text-white text-xs font-bold shrink-0">
+          Save
+        </button>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         TAB 1: WATER
+         ===================================================================== -->
+    <section id="panel-water" aria-label="Water Hydration and Weekly History">
+      <div class="hydrafi-card">
+        <div class="flex items-center justify-between gap-2 pb-3.5 border-b border-[#f5e1eb]">
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-[#9d174d]">Daily Hydration</span>
+            <p class="text-base font-bold text-[#3b232d] mt-0.5">
+              Goal: <span id="water-goal-display" class="text-[#9d174d]">2.50 L</span>
+            </p>
+          </div>
+          <button id="toggle-goal-editor-btn" type="button" class="hydrafi-pill-btn px-3 py-2 rounded-xl bg-[#fbcfe8] hover:bg-[#f8b8de] text-[#9d174d] text-xs font-bold">
+            Set Goal
+          </button>
+        </div>
+
+        <!-- Goal Presets, Weight Suggestion & Custom Goal -->
+        <div id="goal-editor-panel" class="hidden mt-3.5 p-3.5 hydrafi-beige-box space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-[#854d0e]">Daily Water Goal (Litres)</span>
+            <button id="close-goal-editor-btn" type="button" class="text-xs font-semibold text-[#7c5866] underline cursor-pointer">Done</button>
+          </div>
+
+          <div class="grid grid-cols-4 gap-2">
+            <button type="button" data-preset-goal="2.0" class="preset-goal-btn hydrafi-pill-btn py-2 rounded-xl bg-white border border-[#e7dccb] text-xs font-bold text-[#3b232d] hover:border-[#f472b6]">2.0L</button>
+            <button type="button" data-preset-goal="2.5" class="preset-goal-btn hydrafi-pill-btn py-2 rounded-xl bg-white border border-[#e7dccb] text-xs font-bold text-[#3b232d] hover:border-[#f472b6]">2.5L</button>
+            <button type="button" data-preset-goal="3.0" class="preset-goal-btn hydrafi-pill-btn py-2 rounded-xl bg-white border border-[#e7dccb] text-xs font-bold text-[#3b232d] hover:border-[#f472b6]">3.0L</button>
+            <button type="button" data-preset-goal="3.5" class="preset-goal-btn hydrafi-pill-btn py-2 rounded-xl bg-white border border-[#e7dccb] text-xs font-bold text-[#3b232d] hover:border-[#f472b6]">3.5L</button>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <input id="weight-calc-input" type="number" step="1" min="20" max="300" placeholder="Weight (kg)" class="flex-1 px-3 py-2 rounded-xl bg-white border border-[#e7dccb] text-xs font-semibold text-[#3b232d] focus:outline-none focus:border-[#f472b6]" />
+            <button id="apply-weight-goal-btn" type="button" class="hydrafi-pill-btn px-3 py-2 rounded-xl bg-[#f3ece2] hover:bg-[#eae0d2] border border-[#e7dccb] text-[#854d0e] text-xs font-bold shrink-0">
+              Suggest (kg × 0.035)
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <input id="custom-goal-input" type="number" step="0.05" min="0.25" max="15" placeholder="Custom L (e.g. 2.75)" class="flex-1 px-3 py-2.5 rounded-xl bg-white border border-[#e7dccb] text-sm font-semibold text-[#3b232d] focus:outline-none focus:border-[#f472b6]" />
+            <button id="save-custom-goal-btn" type="button" class="hydrafi-pill-btn px-4 py-2.5 rounded-xl bg-[#9d174d] text-white text-xs font-bold">
+              Apply
+            </button>
+          </div>
+        </div>
+
+        <!-- Circular Progress Ring & Progress Bar -->
+        <div class="flex flex-col items-center justify-center my-5">
+          <div class="relative w-[176px] h-[176px] flex items-center justify-center">
+            <svg class="w-[176px] h-[176px]" viewBox="0 0 176 176" aria-hidden="true">
+              <circle cx="88" cy="88" r="72" fill="none" stroke="#fbcfe8" stroke-width="13" />
+              <circle id="water-ring-fg" class="ring-circle" cx="88" cy="88" r="72" fill="none" stroke="#f472b6" stroke-width="13" stroke-linecap="round" stroke-dasharray="452.39" stroke-dashoffset="452.39" />
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-2">
+              <span id="water-pct-label" class="px-2.5 py-0.5 rounded-full bg-[#fdf2f6] border border-[#f5d5e4] text-[#9d174d] text-xs font-extrabold mb-1">0%</span>
+              <span id="water-current-label" class="text-2xl font-extrabold text-[#3b232d]">0.00 L</span>
+              <span id="water-sub-label" class="text-xs font-medium text-[#7c5866] mt-0.5">of 2.50 L goal</span>
+            </div>
+          </div>
+
+          <div class="w-full mt-3">
+            <div class="w-full h-2.5 rounded-full bg-[#f3ece2] overflow-hidden border border-[#e7dccb]">
+              <div id="water-bar-fill" class="h-full bg-[#f472b6] transition-all duration-300" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Editable Water Reminder Timer Box -->
+        <div class="p-3.5 hydrafi-beige-box mb-4 space-y-2.5">
+          <div class="flex items-center justify-between gap-2.5">
+            <div class="min-w-0">
+              <p class="text-xs font-extrabold text-[#854d0e]">
+                Water Reminder (<span id="water-interval-label">30</span> min)
+              </p>
+              <p id="water-reminder-countdown" class="text-[11px] font-semibold text-[#7c5866] mt-0.5">
+                Off — every 30 min (30:00)
+              </p>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button id="toggle-reminder-edit-btn" type="button" class="hydrafi-pill-btn px-2.5 py-2 rounded-xl bg-white border border-[#e7dccb] text-[#854d0e] text-xs font-bold">
+                Timer
+              </button>
+              <button id="toggle-water-reminder-btn" type="button" class="hydrafi-pill-btn px-3 py-2 rounded-xl text-xs font-bold border">
+                Turn On
+              </button>
+            </div>
+          </div>
+
+          <div id="reminder-edit-panel" class="hidden pt-2.5 border-t border-[#e7dccb] space-y-2">
+            <div class="grid grid-cols-4 gap-1.5">
+              <button type="button" data-reminder-min="15" class="reminder-preset-btn hydrafi-pill-btn py-1.5 rounded-lg bg-white border border-[#e7dccb] text-[11px] font-bold text-[#3b232d]">15m</button>
+              <button type="button" data-reminder-min="30" class="reminder-preset-btn hydrafi-pill-btn py-1.5 rounded-lg bg-white border border-[#e7dccb] text-[11px] font-bold text-[#3b232d]">30m</button>
+              <button type="button" data-reminder-min="45" class="reminder-preset-btn hydrafi-pill-btn py-1.5 rounded-lg bg-white border border-[#e7dccb] text-[11px] font-bold text-[#3b232d]">45m</button>
+              <button type="button" data-reminder-min="60" class="reminder-preset-btn hydrafi-pill-btn py-1.5 rounded-lg bg-white border border-[#e7dccb] text-[11px] font-bold text-[#3b232d]">60m</button>
+            </div>
+            <div class="flex items-center gap-2">
+              <input id="custom-reminder-min-input" type="number" min="1" max="240" step="1" placeholder="Custom min (1-240)" class="flex-1 px-3 py-2 rounded-xl bg-white border border-[#e7dccb] text-xs font-semibold text-[#3b232d] focus:outline-none focus:border-[#f472b6]" />
+              <button id="save-reminder-min-btn" type="button" class="hydrafi-pill-btn px-3.5 py-2 rounded-xl bg-[#9d174d] text-white text-xs font-bold shrink-0">
+                Set
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Add Buttons (+0.25 L, +0.50 L, +0.75 L) -->
+        <div class="grid grid-cols-3 gap-2.5">
+          <button type="button" data-add-liters="0.25" class="quick-water-btn hydrafi-pill-btn py-3 px-2 rounded-2xl bg-[#fdf2f6] hover:bg-[#fbcfe8]/70 border border-[#f4c2da] text-[#9d174d] text-center">
+            <span class="block text-sm font-extrabold">+0.25 L</span>
+            <span class="block text-[11px] font-medium text-[#7c5866]">Glass</span>
+          </button>
+
+          <button type="button" data-add-liters="0.50" class="quick-water-btn hydrafi-pill-btn py-3 px-2 rounded-2xl bg-[#f472b6] hover:bg-[#e05aa0] text-white text-center shadow-xs">
+            <span class="block text-sm font-extrabold">+0.50 L</span>
+            <span class="block text-[11px] font-medium text-[#fdf2f6]">Bottle</span>
+          </button>
+
+          <button type="button" data-add-liters="0.75" class="quick-water-btn hydrafi-pill-btn py-3 px-2 rounded-2xl bg-[#fdf2f6] hover:bg-[#fbcfe8]/70 border border-[#f4c2da] text-[#9d174d] text-center">
+            <span class="block text-sm font-extrabold">+0.75 L</span>
+            <span class="block text-[11px] font-medium text-[#7c5866]">Flask</span>
+          </button>
+        </div>
+
+        <!-- Custom L Add -->
+        <div class="flex items-center gap-2 mt-3">
+          <input id="custom-water-add-input" type="number" step="0.05" min="0.05" max="15" placeholder="Custom L (e.g. 0.40)" class="flex-1 px-3.5 py-2.5 rounded-xl bg-[#faf6f0] border border-[#e7dccb] text-xs font-semibold text-[#3b232d] focus:outline-none focus:border-[#f472b6]" />
+          <button id="add-custom-water-btn" type="button" class="hydrafi-pill-btn px-4 py-2.5 rounded-xl bg-[#854d0e] hover:bg-[#6d3e09] text-white text-xs font-bold shrink-0">
+            + Add L
+          </button>
+        </div>
+
+        <!-- Today's Intake Log with Timestamps -->
+        <div class="mt-4 pt-3.5 border-t border-[#f5e1eb]">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-[#854d0e]">Today's Intake Log</span>
+            <span id="water-log-count" class="text-[11px] font-semibold text-[#7c5866]">0 entries</span>
+          </div>
+          <div id="water-log-list" class="space-y-1.5 max-h-32 overflow-y-auto"></div>
+        </div>
+
+        <!-- Undo Last Log & Reset Today -->
+        <div class="flex items-center justify-between gap-3 mt-4 pt-3.5 border-t border-[#f5e1eb]">
+          <button id="undo-water-btn" type="button" class="hydrafi-pill-btn flex-1 py-2.5 px-3 rounded-xl bg-[#f3ece2] hover:bg-[#eae0d2] text-[#854d0e] text-xs font-bold">
+            Undo Last Log
+          </button>
+          <button id="reset-water-btn" type="button" class="hydrafi-pill-btn flex-1 py-2.5 px-3 rounded-xl bg-[#fdf2f6] hover:bg-[#fbcfe8]/70 border border-[#f4c2da] text-[#9d174d] text-xs font-bold">
+            Reset Today
+          </button>
+        </div>
+      </div>
+
+      <!-- 7-Day Hydration History Chart Ending on Today's Weekday -->
+      <div class="hydrafi-card">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <div>
+            <h2 class="text-base font-bold text-[#3b232d]">7-Day Hydration History</h2>
+            <p id="seven-day-subtitle" class="text-xs text-[#7c5866]">7-day intake ending on Fri (Litres)</p>
+          </div>
+          <span id="weekly-water-avg" class="px-2.5 py-1 rounded-lg bg-[#f3ece2] border border-[#e7dccb] text-xs font-bold text-[#854d0e]">Avg 1.90 L</span>
+        </div>
+        <div id="seven-day-chart" class="grid grid-cols-7 gap-2 items-end h-32 pt-3 px-2 hydrafi-beige-box"></div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         TAB 2: WORKOUT
+         ===================================================================== -->
+    <section id="panel-workouts" class="hidden" aria-label="Workouts and Exercises">
+      <div class="hydrafi-card">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-[#9d174d]">Daily Session</span>
+            <h2 class="text-base font-bold text-[#3b232d] mt-0.5">30-Minute Timer</h2>
+          </div>
+          <span id="workout-done-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-[#f3ece2] border border-[#e7dccb] text-[#854d0e]">
+            In Progress
+          </span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 mb-4">
+          <button id="mode-workout-btn" type="button" class="hydrafi-pill-btn py-2.5 px-3 rounded-xl text-xs font-bold border text-center">
+            30-Min Workout
+          </button>
+          <button id="mode-walk-btn" type="button" class="hydrafi-pill-btn py-2.5 px-3 rounded-xl text-xs font-bold border text-center">
+            30-Min Brisk Walk
+          </button>
+        </div>
+
+        <div class="hydrafi-beige-box py-4 px-4 text-center mb-4">
+          <div id="timer-clock-display" class="text-4xl font-extrabold tracking-tight text-[#3b232d] tabular-nums">30:00</div>
+          <p id="timer-mode-caption" class="text-xs font-medium text-[#854d0e] mt-1">Selected: 30-Min Workout</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2">
+          <button id="timer-start-pause-btn" type="button" class="hydrafi-pill-btn py-3 px-2 rounded-xl bg-[#f472b6] hover:bg-[#e05aa0] text-white text-xs font-bold">
+            Start
+          </button>
+          <button id="timer-reset-btn" type="button" class="hydrafi-pill-btn py-3 px-2 rounded-xl bg-[#f3ece2] hover:bg-[#eae0d2] text-[#854d0e] text-xs font-bold">
+            Reset
+          </button>
+          <button id="timer-complete-btn" type="button" class="hydrafi-pill-btn py-3 px-2 rounded-xl bg-[#9d174d] hover:bg-[#82113e] text-white text-xs font-bold">
+            Complete 30m
+          </button>
+        </div>
+      </div>
+
+      <!-- Gender Filter & 12 Body-Part Categories -->
+      <div class="hydrafi-card">
+        <div class="flex items-start justify-between gap-2 mb-3">
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-[#854d0e]">12 Body Parts • 10 Each</span>
+            <h2 class="text-lg font-bold text-[#3b232d] mt-0.5">Exercises</h2>
+          </div>
+
+          <div class="inline-flex rounded-xl bg-[#faf6f0] border border-[#e7dccb] p-1 shrink-0" role="group" aria-label="Gender filter">
+            <button id="gender-female-btn" type="button" class="hydrafi-pill-btn px-3 py-1.5 rounded-lg text-xs font-bold">
+              Female
+            </button>
+            <button id="gender-male-btn" type="button" class="hydrafi-pill-btn px-3 py-1.5 rounded-lg text-xs font-bold">
+              Male
+            </button>
+          </div>
+        </div>
+
+        <div id="category-tabs-grid" class="grid grid-cols-3 gap-1.5 mb-4" role="tablist" aria-label="Body part categories"></div>
+
+        <div class="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-[#f5e1eb]">
+          <div class="min-w-0">
+            <h3 id="active-category-heading" class="text-sm font-extrabold text-[#9d174d] truncate">Flat Stomach</h3>
+            <p id="active-category-sub" class="text-[11px] text-[#7c5866]">10 exercises • Female focus</p>
+          </div>
+          <div class="flex items-center gap-1.5 shrink-0">
+            <span id="active-category-count" class="px-2.5 py-1 rounded-full bg-[#fdf2f6] border border-[#f4c2da] text-[11px] font-bold text-[#9d174d]">
+              0 / 10 Done
+            </span>
+            <button id="reset-category-exercises-btn" type="button" class="hydrafi-pill-btn px-2.5 py-1 rounded-lg bg-[#f3ece2] hover:bg-[#eae0d2] text-[#854d0e] text-[11px] font-bold">
+              Restore Defaults
+            </button>
+          </div>
+        </div>
+
+        <div id="category-exercises-container" class="space-y-2 mb-4"></div>
+
+        <div class="p-3.5 hydrafi-beige-box space-y-2.5">
+          <p id="add-exercise-form-label" class="text-xs font-extrabold text-[#854d0e]">Add Exercise to Flat Stomach</p>
+          <input id="new-exercise-name-input" type="text" maxlength="65" placeholder="Exercise name (e.g. Seated Leg Lift)" class="w-full px-3 py-2 rounded-xl bg-white border border-[#e7dccb] text-xs font-semibold text-[#3b232d] focus:outline-none focus:border-[#f472b6]" />
+          <div class="flex items-center gap-2">
+            <input id="new-exercise-dose-input" type="text" maxlength="40" placeholder="Sets / reps (e.g. 3 x 12 reps)" class="flex-1 px-3 py-2 rounded-xl bg-white border border-[#e7dccb] text-xs font-semibold text-[#3b232d] focus:outline-none focus:border-[#f472b6]" />
+            <button id="add-custom-exercise-btn" type="button" class="hydrafi-pill-btn px-3.5 py-2 rounded-xl bg-[#f472b6] hover:bg-[#e05aa0] text-white text-xs font-bold shrink-0">
+              Add Exercise
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         TAB 3: CHALLENGES
+         ===================================================================== -->
+    <section id="panel-challenges" class="hidden" aria-label="Glow-Up Essentials, Daily Goals, 14-Day Challenges and Weekly Updater">
+      <!-- Glow-Up Essentials: 3 Independent Skincare Steps + Sleep Recovery -->
+      <div class="hydrafi-card">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-[#854d0e]">Radiance &amp; Recovery</span>
+            <h2 class="text-lg font-bold text-[#3b232d] mt-0.5">Glow-Up Essentials</h2>
+          </div>
+          <span id="glow-score-pill" class="px-3 py-1 rounded-full bg-[#f3ece2] border border-[#e7dccb] text-xs font-bold text-[#854d0e]">
+            0%
+          </span>
+        </div>
+
+        <div class="p-3.5 hydrafi-beige-box mb-3.5 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-extrabold text-[#854d0e]">Skincare Steps</span>
+            <span id="skincare-badge" class="px-2 py-0.5 rounded-md bg-white border border-[#e7dccb] text-[11px] font-bold text-[#854d0e]">0/3</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            <button id="glow-step-1" type="button" aria-pressed="false" class="hydrafi-pill-btn py-2.5 px-2 rounded-xl text-[11px] font-bold border text-center leading-tight">
+              1. Cleanse
+            </button>
+            <button id="glow-step-2" type="button" aria-pressed="false" class="hydrafi-pill-btn py-2.5 px-2 rounded-xl text-[11px] font-bold border text-center leading-tight">
+              2. Glow Serum
+            </button>
+            <button id="glow-step-3" type="button" aria-pressed="false" class="hydrafi-pill-btn py-2.5 px-2 rounded-xl text-[11px] font-bold border text-center leading-tight">
+              3. Moisturize / SPF
+            </button>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-2xl border border-[#f0d7e3] bg-[#fdf2f6]/60 space-y-2.5">
+          <div class="flex items-center justify-between gap-2">
+            <div>
+              <p class="text-xs font-extrabold text-[#9d174d]">Sleep Recovery</p>
+              <p class="text-[11px] text-[#7c5866]">Target: 7.5h or more</p>
+            </div>
+            <span id="sleep-hours-badge" class="px-2.5 py-1 rounded-full bg-white border border-[#f4c2da] text-xs font-extrabold text-[#9d174d]">
+              0.0h
+            </span>
+          </div>
+          <div class="grid grid-cols-4 gap-1.5">
+            <button type="button" data-sleep-hrs="6" class="sleep-preset-btn hydrafi-pill-btn py-1.5 rounded-lg bg-white border border-[#e7dccb] text-[11px] font-bold text-[#3b232d]">6h</button>
+            <button type="button" data-sleep-hrs="7" class="sleep-preset-btn hydrafi-pill-btn py-1.5 rounded-lg bg-white border border-[#e7dccb] text-[11px] font-bold text-[#3b232d]">7h</button>
+            <button type="button" data-sleep-hrs="7.5" class="sleep-preset-btn hydrafi-pill-btn py-1.5 rounded-lg bg-white border border-[#e7dccb] text-[11px] font-bold text-[#3b232d]">7.5h</button>
+            <button type="button" data-sleep-hrs="8" class="sleep-preset-btn hydrafi-pill-btn py-1.5 rounded-lg bg-white border border-[#e7dccb] text-[11px] font-bold text-[#3b232d]">8h</button>
+          </div>
+          <div class="flex items-center gap-2">
+            <input id="custom-sleep-input" type="number" step="0.5" min="0" max="16" placeholder="Custom hours (e.g. 7.5)" class="flex-1 px-3 py-2 rounded-xl bg-white border border-[#e7dccb] text-xs font-semibold text-[#3b232d] focus:outline-none focus:border-[#f472b6]" />
+            <button id="save-sleep-btn" type="button" class="hydrafi-pill-btn px-3.5 py-2 rounded-xl bg-[#9d174d] text-white text-xs font-bold shrink-0">
+              Save Sleep
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Daily Goals Checklist -->
+      <div class="hydrafi-card">
+        <div class="flex items-center justify-between gap-2 mb-4">
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-[#9d174d]">Daily Routine</span>
+            <h2 class="text-lg font-bold text-[#3b232d] mt-0.5">Daily Goals Checklist</h2>
+          </div>
+          <span id="goals-summary-pill" class="px-3 py-1 rounded-full bg-[#fdf2f6] border border-[#f4c2da] text-xs font-bold text-[#9d174d]">
+            0 / 5 Done
+          </span>
+        </div>
+
+        <div id="goal-meal-walk-card" class="p-3.5 rounded-2xl hydrafi-beige-box mb-3">
+          <div class="flex items-center justify-between gap-2 mb-2.5">
+            <div>
+              <p class="text-sm font-bold text-[#3b232d]">5 mins walk after every meal</p>
+              <p class="text-[11px] text-[#7c5866]">Tap each meal after walking</p>
+            </div>
+            <span id="meal-walk-badge" class="px-2 py-0.5 rounded-md bg-white border border-[#e7dccb] text-[11px] font-bold text-[#854d0e]">0/3</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            <button id="meal-pill-breakfast" type="button" class="hydrafi-pill-btn py-2 px-2 rounded-xl text-xs font-bold border text-center">
+              Breakfast
+            </button>
+            <button id="meal-pill-lunch" type="button" class="hydrafi-pill-btn py-2 px-2 rounded-xl text-xs font-bold border text-center">
+              Lunch
+            </button>
+            <button id="meal-pill-dinner" type="button" class="hydrafi-pill-btn py-2 px-2 rounded-xl text-xs font-bold border text-center">
+              Dinner
+            </button>
+          </div>
+        </div>
+
+        <button id="goal-no-sugar-btn" type="button" class="hydrafi-pill-btn w-full p-3.5 rounded-2xl border text-left flex items-center justify-between gap-3 mb-3">
+          <div class="min-w-0">
+            <p class="text-sm font-bold text-[#3b232d]">No sugar whole day</p>
+            <p class="text-[11px] text-[#7c5866]">No sweets or sugary drinks today</p>
+          </div>
+          <span id="goal-no-sugar-status" class="px-2.5 py-1 rounded-lg text-xs font-bold shrink-0">Pending</span>
+        </button>
+
+        <button id="goal-movement-btn" type="button" class="hydrafi-pill-btn w-full p-3.5 rounded-2xl border text-left flex items-center justify-between gap-3 mb-4">
+          <div class="min-w-0">
+            <p class="text-sm font-bold text-[#3b232d]">30-min daily movement</p>
+            <p class="text-[11px] text-[#7c5866]">Synced with your 30-minute timer</p>
+          </div>
+          <span id="goal-movement-status" class="px-2.5 py-1 rounded-lg text-xs font-bold shrink-0">Pending</span>
+        </button>
+
+        <div id="custom-goals-list" class="space-y-2.5 mb-4"></div>
+
+        <div class="pt-3.5 border-t border-[#f5e1eb]">
+          <label for="new-custom-goal-input" class="block text-xs font-bold text-[#854d0e] mb-1.5">Add Custom Daily Goal</label>
+          <div class="flex items-center gap-2">
+            <input id="new-custom-goal-input" type="text" maxlength="70" placeholder="e.g. Evening stretch" class="flex-1 px-3.5 py-2.5 rounded-xl bg-[#faf6f0] border border-[#e7dccb] text-sm text-[#3b232d] focus:outline-none focus:border-[#f472b6]" />
+            <button id="add-custom-goal-btn" type="button" class="hydrafi-pill-btn px-4 py-2.5 rounded-xl bg-[#f472b6] hover:bg-[#e05aa0] text-white text-xs font-bold shrink-0">
+              Add Goal
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-[#f5e1eb]">
+          <button id="reset-daily-goals-btn" type="button" class="hydrafi-pill-btn w-full py-2.5 px-4 rounded-xl bg-[#f3ece2] hover:bg-[#eae0d2] text-[#854d0e] text-xs font-bold">
+            Reset Daily Goals
+          </button>
+        </div>
+      </div>
+
+      <!-- Custom 14-Day Challenges -->
+      <div class="hydrafi-card">
+        <div class="flex items-center justify-between gap-2 mb-2">
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-[#854d0e]">14-Day Streaks</span>
+            <h2 class="text-lg font-bold text-[#3b232d] mt-0.5">14-Day Challenges</h2>
+          </div>
+          <span id="challenges-count-badge" class="px-3 py-1 rounded-full bg-[#f3ece2] border border-[#e7dccb] text-xs font-bold text-[#854d0e]">
+            1 Active
+          </span>
+        </div>
+        <p class="text-xs text-[#7c5866] mb-3.5">
+          Tap D1–D14 to toggle days or create a custom 14-day challenge.
+        </p>
+
+        <div class="p-3 hydrafi-beige-box mb-4 space-y-2">
+          <label for="new-challenge-title-input" class="block text-xs font-extrabold text-[#854d0e]">New 14-Day Challenge</label>
+          <div class="flex items-center gap-2">
+            <input id="new-challenge-title-input" type="text" maxlength="70" placeholder="e.g. 14-Day Glow & Hydration" class="flex-1 px-3 py-2.5 rounded-xl bg-white border border-[#e7dccb] text-xs font-semibold text-[#3b232d] focus:outline-none focus:border-[#f472b6]" />
+            <button id="create-challenge-14-btn" type="button" class="hydrafi-pill-btn px-3.5 py-2.5 rounded-xl bg-[#9d174d] hover:bg-[#82113e] text-white text-xs font-bold shrink-0">
+              Create
+            </button>
+          </div>
+        </div>
+
+        <div id="custom-challenges-14-list" class="space-y-4"></div>
+      </div>
+
+      <!-- Weekly Updater at Bottom -->
+      <div class="hydrafi-card">
+        <div class="flex items-center justify-between gap-2 mb-2">
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-[#9d174d]">Weekly Tracker</span>
+            <h2 class="text-lg font-bold text-[#3b232d] mt-0.5">Weekly Updater</h2>
+          </div>
+          <span id="weekly-live-pct-badge" class="px-3 py-1 rounded-full bg-[#fdf2f6] border border-[#f4c2da] text-xs font-extrabold text-[#9d174d]">
+            0%
+          </span>
+        </div>
+        <p class="text-xs text-[#7c5866] mb-3.5">
+          100% when Skincare is 3/3, Sleep is &ge; 7.5h, and Core Habits are 3/3.
+        </p>
+
+        <div class="p-3.5 hydrafi-beige-box mb-3.5 space-y-2.5">
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="p-2.5 rounded-xl bg-white border border-[#e7dccb]">
+              <span class="block text-[10px] font-bold uppercase text-[#854d0e]">Skincare</span>
+              <span id="weekly-live-skin" class="font-extrabold text-[#3b232d]">0/3</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-white border border-[#e7dccb]">
+              <span class="block text-[10px] font-bold uppercase text-[#854d0e]">Sleep</span>
+              <span id="weekly-live-sleep" class="font-extrabold text-[#3b232d]">0.0h</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-white border border-[#e7dccb]">
+              <span class="block text-[10px] font-bold uppercase text-[#854d0e]">Core Habits</span>
+              <span id="weekly-live-habits" class="font-extrabold text-[#3b232d]">0/3</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-white border border-[#e7dccb]">
+              <span class="block text-[10px] font-bold uppercase text-[#854d0e]">Water</span>
+              <span id="weekly-live-water" class="font-extrabold text-[#3b232d]">0.00 L</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 pt-1">
+            <input id="weekly-label-input" type="text" maxlength="40" placeholder="Optional label (e.g. Week 1 - Fri)" class="flex-1 px-3 py-2 rounded-xl bg-white border border-[#e7dccb] text-xs font-semibold text-[#3b232d] focus:outline-none focus:border-[#f472b6]" />
+            <button id="save-weekly-update-btn" type="button" class="hydrafi-pill-btn px-3.5 py-2 rounded-xl bg-[#f472b6] hover:bg-[#e05aa0] text-white text-xs font-bold shrink-0">
+              Save Weekly Snapshot
+            </button>
+          </div>
+        </div>
+
+        <!-- Every-7-Days Average Summary -->
+        <div class="p-3.5 rounded-2xl border border-[#f0d7e3] bg-[#fdf2f6]/70 mb-3.5 space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-extrabold text-[#9d174d]">Every-7-Days Average</span>
+            <span id="weekly-seven-day-cycle-badge" class="px-2 py-0.5 rounded-md bg-white border border-[#f4c2da] text-[11px] font-bold text-[#9d174d]">0 Rows</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="p-2 rounded-xl bg-white border border-[#e7dccb]">
+              <span class="block text-[10px] font-bold uppercase text-[#854d0e]">Avg Completion</span>
+              <span id="weekly-avg-pct" class="font-extrabold text-[#9d174d]">0%</span>
+            </div>
+            <div class="p-2 rounded-xl bg-white border border-[#e7dccb]">
+              <span class="block text-[10px] font-bold uppercase text-[#854d0e]">Avg Sleep (7d)</span>
+              <span id="weekly-avg-sleep" class="font-extrabold text-[#3b232d]">0.0h</span>
+            </div>
+            <div class="p-2 rounded-xl bg-white border border-[#e7dccb]">
+              <span class="block text-[10px] font-bold uppercase text-[#854d0e]">Avg Water (7d)</span>
+              <span id="weekly-avg-water" class="font-extrabold text-[#3b232d]">0.00 L</span>
+            </div>
+            <div class="p-2 rounded-xl bg-white border border-[#e7dccb]">
+              <span class="block text-[10px] font-bold uppercase text-[#854d0e]">Skin &amp; Habits Avg</span>
+              <span id="weekly-avg-habits" class="font-extrabold text-[#3b232d]">0.0/3 • 0.0/3</span>
+            </div>
+          </div>
+          <div id="weekly-seven-day-buckets" class="space-y-1.5 pt-1"></div>
+        </div>
+
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold text-[#854d0e]">Recorded Weekly Snapshots</span>
+          <span id="weekly-updates-count" class="text-[11px] font-semibold text-[#7c5866]">0 saved</span>
+        </div>
+        <div id="weekly-updates-list" class="space-y-2.5"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom 3 Navigation Tabs -->
+  <nav id="hydrafi-bottom-nav" class="hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#f0d7e3] px-3 py-2" aria-label="Primary Navigation">
+    <div class="max-w-[460px] mx-auto grid grid-cols-3 gap-2">
+      <button id="nav-tab-water" type="button" class="hydrafi-pill-btn flex flex-col items-center justify-center py-2 px-2 rounded-xl text-xs font-bold">
+        <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3.5c-3.8 4.6-6.5 8-6.5 11.2a6.5 6.5 0 1013 0c0-3.2-2.7-6.6-6.5-11.2z" />
+        </svg>
+        <span>Water</span>
+      </button>
+
+      <button id="nav-tab-workouts" type="button" class="hydrafi-pill-btn flex flex-col items-center justify-center py-2 px-2 rounded-xl text-xs font-bold">
+        <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+        <span>Workout</span>
+      </button>
+
+      <button id="nav-tab-challenges" type="button" class="hydrafi-pill-btn flex flex-col items-center justify-center py-2 px-2 rounded-xl text-xs font-bold">
+        <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>Challenges</span>
+      </button>
+    </div>
+  </nav>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // =====================================================================
+      // CONSTANTS & EXERCISE DATA (12 BODY PARTS x 10 EXERCISES EACH)
+      // =====================================================================
+      const STORAGE_KEY = 'hydrafi_state_v1';
+      const THIRTY_MIN_SECONDS = 30 * 60;
+      const WEEKDAY_SHORT_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      const WEEKDAY_LONG_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+      const EXERCISE_CATEGORIES = [
+        'Flat Stomach',
+        'Hands',
+        'Abs',
+        'Strength',
+        'Pilates',
+        'Thighs',
+        'Glutes',
+        'Back',
+        'Chest',
+        'Shoulders',
+        'Calves',
+        'Full Body'
+      ];
+
+      const DEFAULT_EXERCISES_DATA = {
+        'Flat Stomach': [
+          { id: 'fs_1', name: 'Forearm Plank Hold', dose: '3 x 30 sec' },
+          { id: 'fs_2', name: 'Slow Dead Bug', dose: '3 x 10 / side' },
+          { id: 'fs_3', name: 'Stomach Vacuum Brace', dose: '3 x 25 sec' },
+          { id: 'fs_4', name: 'Heel Tap Crunch', dose: '3 x 12 / side' },
+          { id: 'fs_5', name: 'Seated Knee Tuck', dose: '3 x 12 reps' },
+          { id: 'fs_6', name: 'Flutter Kicks', dose: '3 x 25 sec' },
+          { id: 'fs_7', name: 'Bird-Dog Core Hold', dose: '3 x 10 / side' },
+          { id: 'fs_8', name: 'Bear Crawl Hold', dose: '3 x 20 sec' },
+          { id: 'fs_9', name: 'Side Plank Dip', dose: '2 x 10 / side' },
+          { id: 'fs_10', name: 'Standing Rib & Core Breath', dose: '3 x 8 breaths' }
+        ],
+        'Hands': [
+          { id: 'hn_1', name: 'Arm & Hand Circles', dose: '2 x 30 sec' },
+          { id: 'hn_2', name: 'Finger Spread & Fist Pulse', dose: '3 x 15 reps' },
+          { id: 'hn_3', name: 'Wrist Flexion & Extension', dose: '3 x 12 reps' },
+          { id: 'hn_4', name: 'Prayer Palm Press', dose: '3 x 20 sec' },
+          { id: 'hn_5', name: 'Reverse Prayer Stretch', dose: '2 x 20 sec' },
+          { id: 'hn_6', name: 'Thumb-to-Finger Tap', dose: '3 x 10 rounds' },
+          { id: 'hn_7', name: 'Overhead Reach & Wrist Roll', dose: '2 x 25 sec' },
+          { id: 'hn_8', name: 'Forearm Shake & Release', dose: '2 x 20 sec' },
+          { id: 'hn_9', name: 'Knuckle Squeeze Hold', dose: '3 x 12 reps' },
+          { id: 'hn_10', name: 'Wall Palm Push', dose: '3 x 20 sec' }
+        ],
+        'Abs': [
+          { id: 'ab_1', name: 'Controlled Bicycle Crunch', dose: '3 x 12 / side' },
+          { id: 'ab_2', name: 'Hollow Body Hold', dose: '3 x 20 sec' },
+          { id: 'ab_3', name: 'Reverse Crunch Curl', dose: '3 x 12 reps' },
+          { id: 'ab_4', name: 'Straight Leg Lower', dose: '3 x 10 reps' },
+          { id: 'ab_5', name: 'Cross-Body Mountain Climber', dose: '3 x 20 sec' },
+          { id: 'ab_6', name: 'Seated Russian Twist', dose: '3 x 14 reps' },
+          { id: 'ab_7', name: 'Toe Reach Crunch', dose: '3 x 15 reps' },
+          { id: 'ab_8', name: 'Scissor Leg Switch', dose: '3 x 20 sec' },
+          { id: 'ab_9', name: 'Plank Hip Dip', dose: '3 x 10 / side' },
+          { id: 'ab_10', name: 'Long-Lever Crunch', dose: '3 x 10 reps' }
+        ],
+        'Strength': [
+          { id: 'st_1', name: 'Tempo Bodyweight Squat', dose: '3 x 12 reps' },
+          { id: 'st_2', name: 'Incline or Knee Push-Up', dose: '3 x 10 reps' },
+          { id: 'st_3', name: 'Reverse Step-Back Lunge', dose: '3 x 10 / side' },
+          { id: 'st_4', name: 'Single-Leg Glute Bridge', dose: '3 x 10 / side' },
+          { id: 'st_5', name: 'Pike Push-Up', dose: '3 x 8 reps' },
+          { id: 'st_6', name: 'Sumo Squat Pulse', dose: '3 x 15 reps' },
+          { id: 'st_7', name: 'Tricep Bench Dip', dose: '3 x 10 reps' },
+          { id: 'st_8', name: 'Split Squat Hold', dose: '3 x 25 sec / side' },
+          { id: 'st_9', name: 'Inchworm Walkout', dose: '3 x 8 reps' },
+          { id: 'st_10', name: 'Wall Sit Endurance', dose: '3 x 30 sec' }
+        ],
+        'Pilates': [
+          { id: 'pl_1', name: 'Pilates Hundred Prep', dose: '1 x 40 pulses' },
+          { id: 'pl_2', name: 'Spine Stretch Forward', dose: '3 x 15 sec' },
+          { id: 'pl_3', name: 'Pelvic Bridge Roll', dose: '3 x 10 reps' },
+          { id: 'pl_4', name: 'Single-Leg Stretch', dose: '3 x 10 / side' },
+          { id: 'pl_5', name: 'Double-Leg Stretch', dose: '3 x 8 reps' },
+          { id: 'pl_6', name: 'Spine Twist Seated', dose: '3 x 8 / side' },
+          { id: 'pl_7', name: 'Swan Prep Extension', dose: '3 x 10 reps' },
+          { id: 'pl_8', name: 'Saw Stretch Twist', dose: '3 x 6 / side' },
+          { id: 'pl_9', name: 'Side Kick Series', dose: '3 x 10 / side' },
+          { id: 'pl_10', name: 'Roll-Up Control', dose: '3 x 6 reps' }
+        ],
+        'Thighs': [
+          { id: 'th_1', name: 'Side-Lying Leg Lift', dose: '3 x 15 / side' },
+          { id: 'th_2', name: 'Reverse Lunge Step', dose: '3 x 10 / side' },
+          { id: 'th_3', name: 'Wall Sit Hold', dose: '3 x 30 sec' },
+          { id: 'th_4', name: 'Curtsy Lunge', dose: '3 x 10 / side' },
+          { id: 'th_5', name: 'Plie Inner-Thigh Squat', dose: '3 x 15 reps' },
+          { id: 'th_6', name: 'Lateral Step Squat', dose: '3 x 10 / side' },
+          { id: 'th_7', name: 'Chair Step-Up', dose: '3 x 10 / side' },
+          { id: 'th_8', name: 'Frog Pump Thigh Squeeze', dose: '3 x 15 reps' },
+          { id: 'th_9', name: 'Standing Quad Stretch & Lift', dose: '2 x 10 / side' },
+          { id: 'th_10', name: 'Pulsing Squat Hold', dose: '3 x 12 pulses' }
+        ],
+        'Glutes': [
+          { id: 'gl_1', name: 'Glute Bridge with Squeeze', dose: '3 x 15 reps' },
+          { id: 'gl_2', name: 'Elevated Hip Thrust', dose: '3 x 12 reps' },
+          { id: 'gl_3', name: 'Donkey Kick Lift', dose: '3 x 15 / side' },
+          { id: 'gl_4', name: 'Fire Hydrant Lift', dose: '3 x 15 / side' },
+          { id: 'gl_5', name: 'Glute Bridge March', dose: '3 x 10 / side' },
+          { id: 'gl_6', name: 'Sumo Squat', dose: '3 x 12 reps' },
+          { id: 'gl_7', name: 'Single-Leg Bridge', dose: '3 x 10 / side' },
+          { id: 'gl_8', name: 'Clamshell Hip Open', dose: '3 x 15 / side' },
+          { id: 'gl_9', name: 'Reverse Lunge Drive', dose: '3 x 10 / side' },
+          { id: 'gl_10', name: 'Frog Pumps', dose: '3 x 20 reps' }
+        ],
+        'Back': [
+          { id: 'bk_1', name: 'Gentle Superman Lift', dose: '3 x 10 reps' },
+          { id: 'bk_2', name: 'Bird-Dog Balance', dose: '3 x 10 / side' },
+          { id: 'bk_3', name: 'Scapular Squeeze Hold', dose: '3 x 12 reps' },
+          { id: 'bk_4', name: 'Cat-Cow Spine Flow', dose: '3 x 10 cycles' },
+          { id: 'bk_5', name: 'Prone Y-T-W Raise', dose: '2 x 8 each' },
+          { id: 'bk_6', name: 'Reverse Snow Angel', dose: '3 x 10 reps' },
+          { id: 'bk_7', name: 'Child Pose Side Reach', dose: '3 x 20 sec / side' },
+          { id: 'bk_8', name: 'Doorway Chest & Back Open', dose: '2 x 25 sec' },
+          { id: 'bk_9', name: 'Swimmer Flutter Back', dose: '3 x 20 sec' },
+          { id: 'bk_10', name: 'Seated Thoracic Twist', dose: '2 x 8 / side' }
+        ],
+        'Chest': [
+          { id: 'ch_1', name: 'Palm Press Chest Squeeze', dose: '3 x 12 slow' },
+          { id: 'ch_2', name: 'Floor Press', dose: '3 x 12 reps' },
+          { id: 'ch_3', name: 'Knee or Incline Push-Up', dose: '3 x 10 reps' },
+          { id: 'ch_4', name: 'Wide Push-Up', dose: '3 x 8 reps' },
+          { id: 'ch_5', name: 'Wall Push-Up', dose: '3 x 15 reps' },
+          { id: 'ch_6', name: 'Push-Up Hold at Bottom', dose: '3 x 10 sec' },
+          { id: 'ch_7', name: 'Diamond or Close Push-Up', dose: '3 x 8 reps' },
+          { id: 'ch_8', name: 'Alternating Hand Tap Plank', dose: '3 x 10 / side' },
+          { id: 'ch_9', name: 'Decline Knee Push-Up', dose: '3 x 8 reps' },
+          { id: 'ch_10', name: 'Chest Opener Stretch', dose: '2 x 25 sec' }
+        ],
+        'Shoulders': [
+          { id: 'sh_1', name: 'Shoulder Rolls Forward & Back', dose: '2 x 12 each' },
+          { id: 'sh_2', name: 'Arm Raises to Front', dose: '3 x 12 reps' },
+          { id: 'sh_3', name: 'Lateral Arm Raises', dose: '3 x 12 reps' },
+          { id: 'sh_4', name: 'Pike Shoulder Press', dose: '3 x 8 reps' },
+          { id: 'sh_5', name: 'Wall Slide Overhead', dose: '3 x 10 reps' },
+          { id: 'sh_6', name: 'Plank Shoulder Tap', dose: '3 x 10 / side' },
+          { id: 'sh_7', name: 'Arm Circles Small to Wide', dose: '2 x 25 sec' },
+          { id: 'sh_8', name: 'Cross-Body Shoulder Stretch', dose: '2 x 20 sec / side' },
+          { id: 'sh_9', name: 'Prone T Raise', dose: '3 x 10 reps' },
+          { id: 'sh_10', name: 'Pendulum Shoulder Swing', dose: '2 x 20 sec / side' }
+        ],
+        'Calves': [
+          { id: 'ca_1', name: 'Standing Calf Raise', dose: '3 x 15 reps' },
+          { id: 'ca_2', name: 'Single-Leg Calf Raise', dose: '3 x 10 / side' },
+          { id: 'ca_3', name: 'Seated Heel Lift', dose: '3 x 20 reps' },
+          { id: 'ca_4', name: 'Calf Raise Hold at Top', dose: '3 x 15 sec' },
+          { id: 'ca_5', name: 'Wall Calf Stretch', dose: '2 x 25 sec / side' },
+          { id: 'ca_6', name: 'Slow Negative Calf Lower', dose: '3 x 10 reps' },
+          { id: 'ca_7', name: 'Ankle Circle Mobility', dose: '2 x 10 / side' },
+          { id: 'ca_8', name: 'Toe-In Calf Raise', dose: '2 x 12 reps' },
+          { id: 'ca_9', name: 'Toe-Out Calf Raise', dose: '2 x 12 reps' },
+          { id: 'ca_10', name: 'Gentle Heel Walk', dose: '2 x 20 sec' }
+        ],
+        'Full Body': [
+          { id: 'fb_1', name: 'Bodyweight Squat to Reach', dose: '3 x 12 reps' },
+          { id: 'fb_2', name: 'Inchworm to Plank', dose: '3 x 8 reps' },
+          { id: 'fb_3', name: 'Reverse Lunge & Twist', dose: '3 x 10 / side' },
+          { id: 'fb_4', name: 'Glute Bridge to Arm Reach', dose: '3 x 12 reps' },
+          { id: 'fb_5', name: 'Step-Back Burpee (No Jump)', dose: '3 x 8 reps' },
+          { id: 'fb_6', name: 'Bird-Dog Crunch', dose: '3 x 10 / side' },
+          { id: 'fb_7', name: 'Side Lunge to Balance', dose: '3 x 10 / side' },
+          { id: 'fb_8', name: 'High Plank Hold', dose: '3 x 30 sec' },
+          { id: 'fb_9', name: 'Standing Good Morning Hinge', dose: '3 x 12 reps' },
+          { id: 'fb_10', name: 'March in Place with Arm Swing', dose: '2 x 45 sec' }
+        ]
+      };
+
+      const DEFAULT_WEEK_BARS = [
+        { label: 'Sat', liters: 1.75 },
+        { label: 'Sun', liters: 2.25 },
+        { label: 'Mon', liters: 2.00 },
+        { label: 'Tue', liters: 2.50 },
+        { label: 'Wed', liters: 1.50 },
+        { label: 'Thu', liters: 2.00 },
+        { label: 'Fri', liters: 0.00 }
+      ];
+
+      function buildRollingWeekLabels(refDate) {
+        const d = refDate instanceof Date && !isNaN(refDate.getTime()) ? refDate : new Date();
+        const todayIdx = d.getDay(); // 0=Sun .. 5=Fri .. 6=Sat
+        const result = [];
+        for (let offset = 6; offset >= 0; offset--) {
+          const idx = (todayIdx - offset + 7) % 7;
+          result.push(WEEKDAY_SHORT_NAMES[idx]);
+        }
+        return result;
+      }
+
+      function alignWeekBarsToToday(rawBars, todayLiters, refDate) {
+        const labels = buildRollingWeekLabels(refDate);
+        const safeToday = Math.max(0, Number(todayLiters) || 0);
+        const src = Array.isArray(rawBars) && rawBars.length === 7 ? rawBars : DEFAULT_WEEK_BARS;
+
+        return labels.map(function (lbl, idx) {
+          if (idx === 6) {
+            return { label: lbl, liters: Number(safeToday.toFixed(2)) };
+          }
+          const matched = src.find(function (item) {
+            return item && String(item.label) === lbl;
+          });
+          const val = matched
+            ? Math.max(0, Number(matched.liters) || 0)
+            : Math.max(0, Number(src[idx] && src[idx].liters) || 0);
+          return { label: lbl, liters: Number(val.toFixed(2)) };
+        });
+      }
+
+      function cloneDefaultExercisesMap() {
+        const copy = {};
+        EXERCISE_CATEGORIES.forEach(function (cat) {
+          copy[cat] = (DEFAULT_EXERCISES_DATA[cat] || []).map(function (ex) {
+            return { id: ex.id, name: ex.name, dose: ex.dose };
+          });
+        });
+        return copy;
+      }
+
+      function createNewChallenge14Obj(title) {
+        const days = [];
+        for (let d = 1; d <= 14; d++) {
+          days.push({ day: d, done: false });
+        }
+        return {
+          id: 'ch14_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+          title: String(title || '14-Day Glow & Hydration').trim(),
+          days: days
+        };
+      }
+
+      function createDefaultState() {
+        return {
+          userName: '',
+          hasEnteredGate: false,
+          activeTab: 'water',
+          waterLiters: 0.00,
+          waterGoalLiters: 2.50,
+          waterLogs: [],
+          waterReminderEnabled: false,
+          waterReminderMinutes: 30,
+          weekBars: alignWeekBarsToToday(DEFAULT_WEEK_BARS, 0.00, new Date()),
+          timerMode: '30-Min Workout',
+          timerCompleted: false,
+          genderFocus: 'Female',
+          selectedCategory: 'Flat Stomach',
+          exercisesByCategory: cloneDefaultExercisesMap(),
+          doneExercises: {},
+          skincareSteps: {
+            step1: false,
+            step2: false,
+            step3: false
+          },
+          sleepHours: 0,
+          mealWalks: {
+            breakfast: false,
+            lunch: false,
+            dinner: false
+          },
+          noSugarWholeDay: false,
+          dailyMovementDone: false,
+          customGoals: [],
+          customChallenges14: [
+            createNewChallenge14Obj('14-Day Glow & Hydration')
+          ],
+          weeklyUpdates: []
+        };
+      }
+
+      // =====================================================================
+      // PERSISTENT STATE WITH LOCALSTORAGE + IN-MEMORY FALLBACK
+      // =====================================================================
+      let appState = createDefaultState();
+      let memoryFallbackStore = null;
+
+      function normalizeWaterLogs(rawLogs) {
+        if (!Array.isArray(rawLogs)) return [];
+        return rawLogs
+          .map(function (entry) {
+            if (typeof entry === 'number') {
+              const amt = Math.max(0, Number(entry) || 0);
+              return amt > 0 ? { amount: amt, time: 'Logged' } : null;
+            }
+            if (entry && typeof entry === 'object') {
+              const amt = Math.max(0, Number(entry.amount) || 0);
+              const t = entry.time ? String(entry.time) : 'Logged';
+              return amt > 0 ? { amount: amt, time: t } : null;
+            }
+            return null;
+          })
+          .filter(Boolean);
+      }
+
+      function loadStateSafely() {
+        const fallback = createDefaultState();
+        try {
+          let raw = null;
+          if (typeof window !== 'undefined' && window.localStorage) {
+            raw = window.localStorage.getItem(STORAGE_KEY);
+          }
+          if (!raw && memoryFallbackStore) {
+            raw = memoryFallbackStore;
+          }
+          if (!raw) return fallback;
+
+          const parsed = JSON.parse(raw);
+          if (!parsed || typeof parsed !== 'object') return fallback;
+
+          const restoredExercises = cloneDefaultExercisesMap();
+          if (parsed.exercisesByCategory && typeof parsed.exercisesByCategory === 'object') {
+            EXERCISE_CATEGORIES.forEach(function (cat) {
+              if (Array.isArray(parsed.exercisesByCategory[cat])) {
+                restoredExercises[cat] = parsed.exercisesByCategory[cat]
+                  .filter(function (ex) { return ex && typeof ex.name === 'string' && ex.name.trim().length > 0; })
+                  .map(function (ex, idx) {
+                    return {
+                      id: ex.id ? String(ex.id) : (cat + '_' + idx),
+                      name: String(ex.name).trim(),
+                      dose: ex.dose ? String(ex.dose).trim() : '3 x 12 reps'
+                    };
+                  });
+              }
+            });
+          }
+
+          let restoredChallenges = fallback.customChallenges14;
+          if (Array.isArray(parsed.customChallenges14) && parsed.customChallenges14.length > 0) {
+            const validList = parsed.customChallenges14
+              .filter(function (ch) { return ch && typeof ch.title === 'string' && ch.title.trim().length > 0; })
+              .map(function (ch, idx) {
+                const daysArr = Array.isArray(ch.days) && ch.days.length === 14
+                  ? ch.days.map(function (d, dIdx) {
+                      return { day: dIdx + 1, done: Boolean(d && d.done) };
+                    })
+                  : createNewChallenge14Obj(ch.title).days;
+                return {
+                  id: ch.id ? String(ch.id) : ('ch14_' + idx),
+                  title: String(ch.title).trim(),
+                  days: daysArr
+                };
+              });
+            if (validList.length > 0) {
+              restoredChallenges = validList;
+            }
+          }
+
+          const restoredWeeklyUpdates = Array.isArray(parsed.weeklyUpdates)
+            ? parsed.weeklyUpdates
+                .filter(function (item) { return item && typeof item === 'object'; })
+                .map(function (item, idx) {
+                  return {
+                    id: item.id ? String(item.id) : ('wk_' + idx),
+                    label: item.label ? String(item.label).trim() : ('Snapshot #' + (idx + 1)),
+                    waterLiters: Math.max(0, Number(item.waterLiters) || 0),
+                    sleepHours: Math.max(0, Number(item.sleepHours) || 0),
+                    skincareCount: Math.min(3, Math.max(0, Number(item.skincareCount) || 0)),
+                    habitsCompleted: Math.min(3, Math.max(0, Number(item.habitsCompleted) || 0)),
+                    percentage: Math.min(100, Math.max(0, Number(item.percentage) || 0))
+                  };
+                })
+            : [];
+
+          const waterVal = Math.max(0, Number(parsed.waterLiters) || 0);
+          const rawReminderMin = Math.round(Number(parsed.waterReminderMinutes) || 30);
+          const safeReminderMin = Math.min(240, Math.max(1, rawReminderMin));
+
+          const stepsSrc = parsed.skincareSteps || parsed.glowCare || {};
+
+          return {
+            userName: parsed.userName ? String(parsed.userName).trim() : '',
+            hasEnteredGate: Boolean(parsed.hasEnteredGate),
+            activeTab: ['water', 'workouts', 'challenges'].indexOf(parsed.activeTab) >= 0
+              ? parsed.activeTab
+              : 'water',
+            waterLiters: waterVal,
+            waterGoalLiters: Math.max(0.25, Number(parsed.waterGoalLiters) || 2.50),
+            waterLogs: normalizeWaterLogs(parsed.waterLogs),
+            waterReminderEnabled: Boolean(parsed.waterReminderEnabled),
+            waterReminderMinutes: safeReminderMin,
+            weekBars: alignWeekBarsToToday(parsed.weekBars, waterVal, new Date()),
+            timerMode: parsed.timerMode === '30-Min Brisk Walk' ? '30-Min Brisk Walk' : '30-Min Workout',
+            timerCompleted: Boolean(parsed.timerCompleted),
+            genderFocus: parsed.genderFocus === 'Male' ? 'Male' : 'Female',
+            selectedCategory: EXERCISE_CATEGORIES.indexOf(parsed.selectedCategory) >= 0
+              ? parsed.selectedCategory
+              : 'Flat Stomach',
+            exercisesByCategory: restoredExercises,
+            doneExercises: parsed.doneExercises && typeof parsed.doneExercises === 'object' ? parsed.doneExercises : {},
+            skincareSteps: {
+              step1: Boolean(stepsSrc.step1 !== undefined ? stepsSrc.step1 : stepsSrc.am),
+              step2: Boolean(stepsSrc.step2 !== undefined ? stepsSrc.step2 : stepsSrc.pm),
+              step3: Boolean(stepsSrc.step3 !== undefined ? stepsSrc.step3 : stepsSrc.spf)
+            },
+            sleepHours: Math.min(16, Math.max(0, Number(parsed.sleepHours) || 0)),
+            mealWalks: {
+              breakfast: Boolean(parsed.mealWalks && parsed.mealWalks.breakfast),
+              lunch: Boolean(parsed.mealWalks && parsed.mealWalks.lunch),
+              dinner: Boolean(parsed.mealWalks && parsed.mealWalks.dinner)
+            },
+            noSugarWholeDay: Boolean(parsed.noSugarWholeDay),
+            dailyMovementDone: Boolean(parsed.dailyMovementDone),
+            customGoals: Array.isArray(parsed.customGoals)
+              ? parsed.customGoals.map(function (g, i) {
+                  return {
+                    id: g && g.id ? g.id : ('goal_' + i),
+                    text: g && g.text ? String(g.text) : '',
+                    done: Boolean(g && g.done)
+                  };
+                }).filter(function (g) { return g.text.trim().length > 0; })
+              : [],
+            customChallenges14: restoredChallenges,
+            weeklyUpdates: restoredWeeklyUpdates
+          };
+        } catch (err) {
+          return fallback;
+        }
+      }
+
+      function saveStateSafely() {
+        try {
+          appState.weekBars = alignWeekBarsToToday(appState.weekBars, appState.waterLiters, new Date());
+          const serialized = JSON.stringify(appState);
+          memoryFallbackStore = serialized;
+          if (typeof window !== 'undefined' && window.localStorage) {
+            window.localStorage.setItem(STORAGE_KEY, serialized);
+          }
+        } catch (err) {
+          // Safe fallback when localStorage is unavailable
+        }
+      }
+
+      // =====================================================================
+      // HELPERS & TOP ALERT BANNER
+      // =====================================================================
+      let alertDismissTimer = null;
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function formatSecondsClock(sec) {
+        const safeSec = Math.max(0, Math.floor(Number(sec) || 0));
+        const mins = Math.floor(safeSec / 60);
+        const rem = safeSec % 60;
+        return String(mins).padStart(2, '0') + ':' + String(rem).padStart(2, '0');
+      }
+
+      function getCurrentShortTime() {
+        try {
+          return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        } catch (err) {
+          return 'Now';
+        }
+      }
+
+      function showTopAlert(title, message) {
+        const banner = document.getElementById('top-alert-banner');
+        const titleEl = document.getElementById('top-alert-title');
+        const msgEl = document.getElementById('top-alert-message');
+        if (!banner || !titleEl || !msgEl) return;
+
+        titleEl.textContent = title || 'HydraFit Alert';
+        msgEl.textContent = message || 'Time to drink water.';
+        banner.classList.remove('hidden');
+
+        if (alertDismissTimer) {
+          clearTimeout(alertDismissTimer);
+        }
+        alertDismissTimer = setTimeout(function () {
+          hideTopAlert();
+        }, 5000);
+      }
+
+      function hideTopAlert() {
+        const banner = document.getElementById('top-alert-banner');
+        if (banner) {
+          banner.classList.add('hidden');
+        }
+      }
+
+      // =====================================================================
+      // ENTRY / LOGIN GATE & HEADER USER NAME
+      // =====================================================================
+      function getActiveDisplayName() {
+        const clean = appState.userName && String(appState.userName).trim();
+        return clean ? clean : 'Guest';
+      }
+
+      function syncGateAndMainScreens() {
+        const gateEl = document.getElementById('welcome-gate-screen');
+        const mainEl = document.getElementById('hydrafi-main-app');
+        const navEl = document.getElementById('hydrafi-bottom-nav');
+        const entered = Boolean(appState.hasEnteredGate);
+
+        if (gateEl && mainEl && navEl) {
+          if (entered) {
+            gateEl.classList.add('hidden');
+            mainEl.classList.remove('hidden');
+            navEl.classList.remove('hidden');
+          } else {
+            gateEl.classList.remove('hidden');
+            mainEl.classList.add('hidden');
+            navEl.classList.add('hidden');
+          }
+        }
+
+        const headerNameEl = document.getElementById('header-active-user-name');
+        const inlineInput = document.getElementById('inline-name-input');
+        const gateInput = document.getElementById('gate-name-input');
+
+        if (headerNameEl) {
+          headerNameEl.textContent = getActiveDisplayName();
+        }
+        if (inlineInput && document.activeElement !== inlineInput) {
+          inlineInput.value = appState.userName || '';
+        }
+        if (gateInput && document.activeElement !== gateInput) {
+          gateInput.value = appState.userName || '';
+        }
+      }
+
+      function submitGateName(rawName) {
+        const trimmed = String(rawName || '').trim();
+        appState.userName = trimmed || 'Guest';
+        appState.hasEnteredGate = true;
+        saveStateSafely();
+        syncGateAndMainScreens();
+      }
+
+      function saveInlineName() {
+        const inlineInput = document.getElementById('inline-name-input');
+        const drawer = document.getElementById('edit-name-drawer');
+        const val = inlineInput ? String(inlineInput.value || '').trim() : '';
+        appState.userName = val || 'Guest';
+        appState.hasEnteredGate = true;
+        saveStateSafely();
+        syncGateAndMainScreens();
+        if (drawer) drawer.classList.add('hidden');
+      }
+
+      // =====================================================================
+      // BOTTOM 3-TAB NAVIGATION
+      // =====================================================================
+      function switchTab(tabName) {
+        const validTabs = ['water', 'workouts', 'challenges'];
+        const target = validTabs.indexOf(tabName) >= 0 ? tabName : 'water';
+        appState.activeTab = target;
+        saveStateSafely();
+
+        validTabs.forEach(function (name) {
+          const panel = document.getElementById('panel-' + name);
+          const navBtn = document.getElementById('nav-tab-' + name);
+          if (panel) {
+            if (name === target) {
+              panel.classList.remove('hidden');
+            } else {
+              panel.classList.add('hidden');
+            }
+          }
+          if (navBtn) {
+            if (name === target) {
+              navBtn.className = 'hydrafi-pill-btn flex flex-col items-center justify-center py-2 px-2 rounded-xl text-xs font-bold bg-[#fbcfe8] text-[#9d174d]';
+            } else {
+              navBtn.className = 'hydrafi-pill-btn flex flex-col items-center justify-center py-2 px-2 rounded-xl text-xs font-bold text-[#7c5866] hover:text-[#9d174d]';
+            }
+          }
+        });
+      }
+
+      // =====================================================================
+      // TAB 1: WATER, REMINDER TIMER, LOGS & 7-DAY CHART
+      // =====================================================================
+      let waterReminderRemainingSec = 30 * 60;
+      let waterReminderIntervalId = null;
+
+      function getReminderIntervalSeconds() {
+        const mins = Math.min(240, Math.max(1, Math.round(Number(appState.waterReminderMinutes) || 30)));
+        return mins * 60;
+      }
+
+      function setWaterReminderMinutes(newMinutes) {
+        const parsed = Math.round(Number(newMinutes));
+        if (!isFinite(parsed) || parsed < 1 || parsed > 240) {
+          showTopAlert('Invalid Timer', 'Enter reminder minutes between 1 and 240.');
+          return;
+        }
+        appState.waterReminderMinutes = parsed;
+        waterReminderRemainingSec = parsed * 60;
+        saveStateSafely();
+        renderWaterReminderUI();
+      }
+
+      function startWaterReminderLoop() {
+        if (waterReminderIntervalId) {
+          clearInterval(waterReminderIntervalId);
+          waterReminderIntervalId = null;
+        }
+        if (!appState.waterReminderEnabled) {
+          renderWaterReminderUI();
+          return;
+        }
+
+        waterReminderIntervalId = setInterval(function () {
+          if (!appState.waterReminderEnabled) return;
+          if (waterReminderRemainingSec > 1) {
+            waterReminderRemainingSec -= 1;
+            renderWaterReminderUI();
+          } else {
+            waterReminderRemainingSec = getReminderIntervalSeconds();
+            renderWaterReminderUI();
+            showTopAlert(
+              'Water Reminder (' + appState.waterReminderMinutes + 'm)',
+              'Time to drink water! Today: ' + appState.waterLiters.toFixed(2) + ' L.'
+            );
+          }
+        }, 1000);
+
+        renderWaterReminderUI();
+      }
+
+      function toggleWaterReminder() {
+        appState.waterReminderEnabled = !Boolean(appState.waterReminderEnabled);
+        waterReminderRemainingSec = getReminderIntervalSeconds();
+        saveStateSafely();
+        startWaterReminderLoop();
+      }
+
+      function renderWaterReminderUI() {
+        const mins = Math.min(240, Math.max(1, Math.round(Number(appState.waterReminderMinutes) || 30)));
+        const intervalLabel = document.getElementById('water-interval-label');
+        const btn = document.getElementById('toggle-water-reminder-btn');
+        const statusEl = document.getElementById('water-reminder-countdown');
+
+        if (intervalLabel) intervalLabel.textContent = String(mins);
+
+        document.querySelectorAll('.reminder-preset-btn').forEach(function (pBtn) {
+          const pMin = Number(pBtn.getAttribute('data-reminder-min'));
+          if (pMin === mins) {
+            pBtn.className = 'reminder-preset-btn hydrafi-pill-btn py-1.5 rounded-lg bg-[#f472b6] border border-[#f472b6] text-[11px] font-bold text-white';
+          } else {
+            pBtn.className = 'reminder-preset-btn hydrafi-pill-btn py-1.5 rounded-lg bg-white border border-[#e7dccb] text-[11px] font-bold text-[#3b232d]';
+          }
+        });
+
+        if (!btn || !statusEl) return;
+
+        if (appState.waterReminderEnabled) {
+          btn.textContent = 'Turn Off';
+          btn.className = 'hydrafi-pill-btn px-3 py-2 rounded-xl text-xs font-bold border shrink-0 bg-[#9d174d] border-[#9d174d] text-white';
+          statusEl.textContent = 'Next alert in ' + formatSecondsClock(waterReminderRemainingSec);
+        } else {
+          btn.textContent = 'Turn On';
+          btn.className = 'hydrafi-pill-btn px-3 py-2 rounded-xl text-xs font-bold border shrink-0 bg-white border-[#e7dccb] text-[#854d0e]';
+          statusEl.textContent = 'Off — every ' + mins + ' min (' + formatSecondsClock(waterReminderRemainingSec) + ')';
+        }
+      }
+
+      function setWaterGoal(newGoalLiters) {
+        const parsed = Number(newGoalLiters);
+        if (!isFinite(parsed) || parsed < 0.25 || parsed > 15) {
+          showTopAlert('Invalid Goal', 'Enter a water goal between 0.25 L and 15.0 L.');
+          return;
+        }
+        appState.waterGoalLiters = Number(parsed.toFixed(2));
+        saveStateSafely();
+        renderWaterSection();
+        renderWeeklyUpdaterSection();
+      }
+
+      function applyWeightSuggestedGoal(weightKg) {
+        const w = Number(weightKg);
+        if (!isFinite(w) || w < 20 || w > 300) {
+          showTopAlert('Invalid Weight', 'Enter weight in kg between 20 and 300.');
+          return;
+        }
+        const suggested = Math.min(8.0, Math.max(0.5, Number((w * 0.035).toFixed(2))));
+        setWaterGoal(suggested);
+      }
+
+      function addWaterLiters(amount) {
+        const num = Number(amount);
+        if (!isFinite(num) || num <= 0 || num > 15) {
+          showTopAlert('Invalid Amount', 'Enter a positive Litre amount.');
+          return;
+        }
+        const rounded = Number(num.toFixed(2));
+        appState.waterLiters = Number((appState.waterLiters + rounded).toFixed(2));
+        appState.waterLogs.push({
+          amount: rounded,
+          time: getCurrentShortTime()
+        });
+        saveStateSafely();
+        renderWaterSection();
+        renderWeeklyUpdaterSection();
+      }
+
+      function undoLastWaterLog() {
+        if (!appState.waterLogs.length) return;
+        const lastEntry = appState.waterLogs.pop();
+        const lastAmt = typeof lastEntry === 'object' ? Number(lastEntry.amount || 0) : Number(lastEntry || 0);
+        appState.waterLiters = Math.max(0, Number((appState.waterLiters - lastAmt).toFixed(2)));
+        saveStateSafely();
+        renderWaterSection();
+        renderWeeklyUpdaterSection();
+      }
+
+      function resetTodayWater() {
+        appState.waterLiters = 0.00;
+        appState.waterLogs = [];
+        saveStateSafely();
+        renderWaterSection();
+        renderWeeklyUpdaterSection();
+      }
+
+      function renderWaterLogs() {
+        const listEl = document.getElementById('water-log-list');
+        const countEl = document.getElementById('water-log-count');
+        if (!listEl) return;
+
+        const logs = Array.isArray(appState.waterLogs) ? appState.waterLogs : [];
+        if (countEl) {
+          countEl.textContent = logs.length + (logs.length === 1 ? ' entry' : ' entries');
+        }
+
+        listEl.innerHTML = '';
+        if (logs.length === 0) {
+          const p = document.createElement('p');
+          p.className = 'text-[11px] text-[#7c5866] py-2 px-3 hydrafi-beige-box';
+          p.textContent = 'No water logged yet today.';
+          listEl.appendChild(p);
+          return;
+        }
+
+        logs.slice().reverse().forEach(function (item) {
+          const row = document.createElement('div');
+          row.className = 'px-3 py-1.5 rounded-xl bg-[#faf6f0] border border-[#e7dccb] flex items-center justify-between text-xs';
+          row.innerHTML = `
+            <span class="font-bold text-[#9d174d]">+${Number(item.amount || 0).toFixed(2)} L</span>
+            <span class="text-[11px] font-medium text-[#7c5866]">${escapeHtml(item.time || 'Logged')}</span>
+          `;
+          listEl.appendChild(row);
+        });
+      }
+
+      function renderWaterSection() {
+        const goal = Math.max(0.25, Number(appState.waterGoalLiters) || 2.50);
+        const current = Math.max(0, Number(appState.waterLiters) || 0);
+        const pct = Math.min(100, Math.round((current / goal) * 100));
+
+        const goalDisp = document.getElementById('water-goal-display');
+        const pctLabel = document.getElementById('water-pct-label');
+        const currentLabel = document.getElementById('water-current-label');
+        const subLabel = document.getElementById('water-sub-label');
+        const barFill = document.getElementById('water-bar-fill');
+        const ringFg = document.getElementById('water-ring-fg');
+
+        if (goalDisp) goalDisp.textContent = goal.toFixed(2) + ' L';
+        if (pctLabel) pctLabel.textContent = pct + '%';
+        if (currentLabel) currentLabel.textContent = current.toFixed(2) + ' L';
+        if (subLabel) subLabel.textContent = 'of ' + goal.toFixed(2) + ' L goal';
+        if (barFill) barFill.style.width = pct + '%';
+
+        if (ringFg) {
+          const circumference = 2 * Math.PI * 72;
+          const offset = circumference * (1 - pct / 100);
+          ringFg.setAttribute('stroke-dasharray', circumference.toFixed(2));
+          ringFg.setAttribute('stroke-dashoffset', offset.toFixed(2));
+        }
+
+        document.querySelectorAll('.preset-goal-btn').forEach(function (btn) {
+          const presetVal = Number(btn.getAttribute('data-preset-goal'));
+          if (Math.abs(presetVal - goal) < 0.001) {
+            btn.className = 'preset-goal-btn hydrafi-pill-btn py-2 rounded-xl bg-[#f472b6] border border-[#f472b6] text-xs font-bold text-white';
+          } else {
+            btn.className = 'preset-goal-btn hydrafi-pill-btn py-2 rounded-xl bg-white border border-[#e7dccb] text-xs font-bold text-[#3b232d] hover:border-[#f472b6]';
+          }
+        });
+
+        renderWaterReminderUI();
+        renderWaterLogs();
+        renderSevenDayChart();
+      }
+
+      function renderSevenDayChart() {
+        const chartEl = document.getElementById('seven-day-chart');
+        const avgEl = document.getElementById('weekly-water-avg');
+        const subEl = document.getElementById('seven-day-subtitle');
+        if (!chartEl) return;
+
+        const now = new Date();
+        const bars = alignWeekBarsToToday(appState.weekBars, appState.waterLiters, now);
+        const todayShort = WEEKDAY_SHORT_NAMES[now.getDay()];
+
+        if (subEl) {
+          subEl.textContent = '7-day intake ending on ' + todayShort + ' (Litres)';
+        }
+
+        const maxVal = Math.max(
+          Number(appState.waterGoalLiters) || 2.5,
+          2.0,
+          ...bars.map(function (b) { return b.liters; })
+        );
+
+        const total = bars.reduce(function (sum, b) { return sum + b.liters; }, 0);
+        if (avgEl) {
+          avgEl.textContent = 'Avg ' + (total / bars.length).toFixed(2) + ' L';
+        }
+
+        chartEl.innerHTML = '';
+        bars.forEach(function (dayItem, idx) {
+          const val = dayItem.liters;
+          const computedPct = Math.round((val / maxVal) * 100);
+          const heightPct = Math.min(100, Math.max(14, computedPct));
+          const isToday = idx === bars.length - 1;
+
+          const col = document.createElement('div');
+          col.className = 'flex flex-col items-center justify-end h-full pb-2';
+          col.innerHTML = `
+            <span class="text-[10px] font-bold text-[#854d0e] mb-1">${val.toFixed(1)}</span>
+            <div class="w-full max-w-[26px] rounded-t-lg transition-all duration-300 ${isToday ? 'bg-[#9d174d]' : 'bg-[#f472b6]'}" style="height: ${heightPct}%;"></div>
+            <span class="text-[10px] font-extrabold mt-1.5 ${isToday ? 'text-[#9d174d] underline' : 'text-[#7c5866]'}">${escapeHtml(dayItem.label)}</span>
+          `;
+          chartEl.appendChild(col);
+        });
+      }
+
+      // =====================================================================
+      // TAB 2: 30:00 WORKOUT TIMER & 12 BODY-PART CATEGORIES
+      // =====================================================================
+      let timerRemainingSec = THIRTY_MIN_SECONDS;
+      let timerIntervalId = null;
+      let timerIsRunning = false;
+
+      function setTimerMode(mode) {
+        appState.timerMode = mode === '30-Min Brisk Walk' ? '30-Min Brisk Walk' : '30-Min Workout';
+        saveStateSafely();
+        renderTimerSection();
+      }
+
+      function toggleStartPauseTimer() {
+        if (timerIsRunning) {
+          if (timerIntervalId) {
+            clearInterval(timerIntervalId);
+            timerIntervalId = null;
+          }
+          timerIsRunning = false;
+          renderTimerSection();
+          return;
+        }
+
+        if (timerRemainingSec <= 0) {
+          timerRemainingSec = THIRTY_MIN_SECONDS;
+        }
+
+        timerIsRunning = true;
+        renderTimerSection();
+
+        timerIntervalId = setInterval(function () {
+          if (timerRemainingSec > 1) {
+            timerRemainingSec -= 1;
+            renderTimerSection();
+          } else {
+            timerRemainingSec = 0;
+            if (timerIntervalId) {
+              clearInterval(timerIntervalId);
+              timerIntervalId = null;
+            }
+            timerIsRunning = false;
+            markThirtyMinComplete();
+          }
+        }, 1000);
+      }
+
+      function resetTimer() {
+        if (timerIntervalId) {
+          clearInterval(timerIntervalId);
+          timerIntervalId = null;
+        }
+        timerIsRunning = false;
+        timerRemainingSec = THIRTY_MIN_SECONDS;
+        renderTimerSection();
+      }
+
+      function markThirtyMinComplete() {
+        if (timerIntervalId) {
+          clearInterval(timerIntervalId);
+          timerIntervalId = null;
+        }
+        timerIsRunning = false;
+        appState.timerCompleted = true;
+        appState.dailyMovementDone = true;
+        saveStateSafely();
+        renderTimerSection();
+        renderGoalsSection();
+      }
+
+      function renderTimerSection() {
+        const clockEl = document.getElementById('timer-clock-display');
+        const captionEl = document.getElementById('timer-mode-caption');
+        const startPauseBtn = document.getElementById('timer-start-pause-btn');
+        const modeWorkoutBtn = document.getElementById('mode-workout-btn');
+        const modeWalkBtn = document.getElementById('mode-walk-btn');
+        const doneBadge = document.getElementById('workout-done-badge');
+
+        if (clockEl) clockEl.textContent = formatSecondsClock(timerRemainingSec);
+        if (captionEl) captionEl.textContent = 'Selected: ' + appState.timerMode;
+
+        if (startPauseBtn) {
+          if (timerIsRunning) {
+            startPauseBtn.textContent = 'Pause';
+          } else if (timerRemainingSec > 0 && timerRemainingSec < THIRTY_MIN_SECONDS) {
+            startPauseBtn.textContent = 'Resume';
+          } else {
+            startPauseBtn.textContent = 'Start';
+          }
+        }
+
+        if (modeWorkoutBtn && modeWalkBtn) {
+          if (appState.timerMode === '30-Min Workout') {
+            modeWorkoutBtn.className = 'hydrafi-pill-btn py-2.5 px-3 rounded-xl text-xs font-bold border text-center bg-[#f472b6] border-[#f472b6] text-white';
+            modeWalkBtn.className = 'hydrafi-pill-btn py-2.5 px-3 rounded-xl text-xs font-bold border text-center bg-[#faf6f0] border-[#e7dccb] text-[#854d0e]';
+          } else {
+            modeWalkBtn.className = 'hydrafi-pill-btn py-2.5 px-3 rounded-xl text-xs font-bold border text-center bg-[#f472b6] border-[#f472b6] text-white';
+            modeWorkoutBtn.className = 'hydrafi-pill-btn py-2.5 px-3 rounded-xl text-xs font-bold border text-center bg-[#faf6f0] border-[#e7dccb] text-[#854d0e]';
+          }
+        }
+
+        if (doneBadge) {
+          if (appState.timerCompleted) {
+            doneBadge.textContent = 'Completed';
+            doneBadge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-[#fbcfe8] border border-[#f472b6] text-[#9d174d]';
+          } else {
+            doneBadge.textContent = 'In Progress';
+            doneBadge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-[#f3ece2] border border-[#e7dccb] text-[#854d0e]';
+          }
+        }
+      }
+
+      function setGenderFocus(gender) {
+        appState.genderFocus = gender === 'Male' ? 'Male' : 'Female';
+        saveStateSafely();
+        renderExerciseLibrary();
+      }
+
+      function selectCategory(categoryName) {
+        if (EXERCISE_CATEGORIES.indexOf(categoryName) < 0) return;
+        appState.selectedCategory = categoryName;
+        saveStateSafely();
+        renderExerciseLibrary();
+      }
+
+      function toggleExerciseDone(exerciseId) {
+        appState.doneExercises[exerciseId] = !Boolean(appState.doneExercises[exerciseId]);
+        saveStateSafely();
+        renderExerciseLibrary();
+      }
+
+      function deleteExerciseFromCategory(categoryName, exerciseId) {
+        if (!Array.isArray(appState.exercisesByCategory[categoryName])) return;
+        appState.exercisesByCategory[categoryName] = appState.exercisesByCategory[categoryName].filter(function (ex) {
+          return ex.id !== exerciseId;
+        });
+        delete appState.doneExercises[exerciseId];
+        saveStateSafely();
+        renderExerciseLibrary();
+      }
+
+      function addExerciseToActiveCategory() {
+        const nameInput = document.getElementById('new-exercise-name-input');
+        const doseInput = document.getElementById('new-exercise-dose-input');
+        if (!nameInput) return;
+
+        const name = nameInput.value.trim();
+        const dose = doseInput && doseInput.value.trim() ? doseInput.value.trim() : '3 x 12 reps';
+        if (!name) return;
+
+        const cat = appState.selectedCategory || 'Flat Stomach';
+        if (!Array.isArray(appState.exercisesByCategory[cat])) {
+          appState.exercisesByCategory[cat] = [];
+        }
+
+        appState.exercisesByCategory[cat].push({
+          id: 'ex_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+          name: name,
+          dose: dose
+        });
+
+        nameInput.value = '';
+        if (doseInput) doseInput.value = '';
+        saveStateSafely();
+        renderExerciseLibrary();
+      }
+
+      function restoreDefaultExercisesForActiveCategory() {
+        const cat = appState.selectedCategory || 'Flat Stomach';
+        appState.exercisesByCategory[cat] = (DEFAULT_EXERCISES_DATA[cat] || []).map(function (ex) {
+          return { id: ex.id, name: ex.name, dose: ex.dose };
+        });
+        saveStateSafely();
+        renderExerciseLibrary();
+      }
+
+      function renderExerciseLibrary() {
+        const gender = appState.genderFocus === 'Male' ? 'Male' : 'Female';
+        const activeCat = EXERCISE_CATEGORIES.indexOf(appState.selectedCategory) >= 0
+          ? appState.selectedCategory
+          : 'Flat Stomach';
+
+        const femaleBtn = document.getElementById('gender-female-btn');
+        const maleBtn = document.getElementById('gender-male-btn');
+        if (femaleBtn && maleBtn) {
+          if (gender === 'Female') {
+            femaleBtn.className = 'hydrafi-pill-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-[#f472b6] text-white';
+            maleBtn.className = 'hydrafi-pill-btn px-3 py-1.5 rounded-lg text-xs font-bold text-[#854d0e]';
+          } else {
+            maleBtn.className = 'hydrafi-pill-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-[#f472b6] text-white';
+            femaleBtn.className = 'hydrafi-pill-btn px-3 py-1.5 rounded-lg text-xs font-bold text-[#854d0e]';
+          }
+        }
+
+        const tabsGrid = document.getElementById('category-tabs-grid');
+        if (tabsGrid) {
+          tabsGrid.innerHTML = '';
+          EXERCISE_CATEGORIES.forEach(function (catName) {
+            const isSelected = catName === activeCat;
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.setAttribute('role', 'tab');
+            btn.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+            btn.className = isSelected
+              ? 'hydrafi-pill-btn py-2 px-2 rounded-xl text-xs font-bold border text-center bg-[#9d174d] border-[#9d174d] text-white truncate'
+              : 'hydrafi-pill-btn py-2 px-2 rounded-xl text-xs font-bold border text-center bg-[#faf6f0] border-[#e7dccb] text-[#3b232d] hover:border-[#f472b6] truncate';
+            btn.textContent = catName;
+            btn.addEventListener('click', function () {
+              selectCategory(catName);
+            });
+            tabsGrid.appendChild(btn);
+          });
+        }
+
+        const exercises = appState.exercisesByCategory[activeCat] || [];
+        const completedCount = exercises.filter(function (ex) {
+          return Boolean(appState.doneExercises[ex.id]);
+        }).length;
+
+        const headingEl = document.getElementById('active-category-heading');
+        const subEl = document.getElementById('active-category-sub');
+        const countEl = document.getElementById('active-category-count');
+        const addLabelEl = document.getElementById('add-exercise-form-label');
+        if (headingEl) headingEl.textContent = activeCat;
+        if (subEl) subEl.textContent = exercises.length + ' exercises • ' + gender + ' focus';
+        if (countEl) countEl.textContent = completedCount + ' / ' + exercises.length + ' Done';
+        if (addLabelEl) addLabelEl.textContent = 'Add Exercise to ' + activeCat;
+
+        const container = document.getElementById('category-exercises-container');
+        if (!container) return;
+        container.innerHTML = '';
+
+        if (exercises.length === 0) {
+          const emptyMsg = document.createElement('p');
+          emptyMsg.className = 'text-xs text-center text-[#7c5866] py-4 hydrafi-beige-box';
+          emptyMsg.textContent = 'No exercises in this category. Add one below or tap Restore Defaults.';
+          container.appendChild(emptyMsg);
+          return;
+        }
+
+        exercises.forEach(function (ex, idx) {
+          const isDone = Boolean(appState.doneExercises[ex.id]);
+
+          const row = document.createElement('div');
+          row.className = isDone
+            ? 'p-3 rounded-xl border border-[#f472b6] bg-[#fdf2f6] flex items-center justify-between gap-2'
+            : 'p-3 rounded-xl border border-[#e7dccb] bg-white flex items-center justify-between gap-2';
+
+          const infoDiv = document.createElement('div');
+          infoDiv.className = 'min-w-0 flex-1';
+          infoDiv.innerHTML = `
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-extrabold text-[#854d0e]">${idx + 1}.</span>
+              <p class="text-xs font-bold text-[#3b232d] truncate">${escapeHtml(ex.name)}</p>
+            </div>
+            <p class="text-[11px] text-[#7c5866] mt-0.5 pl-4">${escapeHtml(ex.dose)}</p>
+          `;
+
+          const actionsDiv = document.createElement('div');
+          actionsDiv.className = 'flex items-center gap-1.5 shrink-0';
+
+          const markBtn = document.createElement('button');
+          markBtn.type = 'button';
+          markBtn.className = isDone
+            ? 'hydrafi-pill-btn px-2.5 py-1.5 rounded-xl text-[11px] font-bold border bg-[#9d174d] border-[#9d174d] text-white'
+            : 'hydrafi-pill-btn px-2.5 py-1.5 rounded-xl text-[11px] font-bold border bg-[#faf6f0] border-[#e7dccb] text-[#854d0e]';
+          markBtn.textContent = isDone ? 'Done' : 'Mark Done';
+          markBtn.addEventListener('click', function () {
+            toggleExerciseDone(ex.id);
+          });
+
+          const delBtn = document.createElement('button');
+          delBtn.type = 'button';
+          delBtn.setAttribute('aria-label', 'Delete ' + ex.name);
+          delBtn.className = 'hydrafi-pill-btn px-2 py-1.5 rounded-xl text-[11px] font-bold border bg-white border-[#e7dccb] hover:border-[#f472b6] text-[#9d174d]';
+          delBtn.textContent = 'Delete';
+          delBtn.addEventListener('click', function () {
+            deleteExerciseFromCategory(activeCat, ex.id);
+          });
+
+          actionsDiv.appendChild(markBtn);
+          actionsDiv.appendChild(delBtn);
+          row.appendChild(infoDiv);
+          row.appendChild(actionsDiv);
+          container.appendChild(row);
+        });
+      }
+
+      // =====================================================================
+      // TAB 3: SKINCARE, SLEEP, DAILY GOALS, 14-DAY & WEEKLY UPDATER
+      // =====================================================================
+      function toggleSkincareStep(stepKey) {
+        if (['step1', 'step2', 'step3'].indexOf(stepKey) < 0) return;
+        if (!appState.skincareSteps || typeof appState.skincareSteps !== 'object') {
+          appState.skincareSteps = { step1: false, step2: false, step3: false };
+        }
+        appState.skincareSteps[stepKey] = !Boolean(appState.skincareSteps[stepKey]);
+        saveStateSafely();
+        renderGoalsSection();
+      }
+
+      function getSkincareStatusInfo() {
+        const s1 = Boolean(appState.skincareSteps && appState.skincareSteps.step1);
+        const s2 = Boolean(appState.skincareSteps && appState.skincareSteps.step2);
+        const s3 = Boolean(appState.skincareSteps && appState.skincareSteps.step3);
+        const count = (s1 ? 1 : 0) + (s2 ? 1 : 0) + (s3 ? 1 : 0);
+        return {
+          count: count,
+          isComplete: count === 3
+        };
+      }
+
+      function getCoreHabitsCompletedCount() {
+        const allMealsWalked = Boolean(
+          appState.mealWalks &&
+          appState.mealWalks.breakfast &&
+          appState.mealWalks.lunch &&
+          appState.mealWalks.dinner
+        );
+        const noSugarDone = Boolean(appState.noSugarWholeDay);
+        const movementDone = Boolean(appState.dailyMovementDone);
+        return (allMealsWalked ? 1 : 0) + (noSugarDone ? 1 : 0) + (movementDone ? 1 : 0);
+      }
+
+      // Immediately 100% whenever skincare is 3/3 AND sleep >= 7.5h AND core habits are 3/3
+      function calculateCompletionPercentage() {
+        const skinInfo = getSkincareStatusInfo();
+        const sleepHrs = Math.max(0, Number(appState.sleepHours) || 0);
+        const sleepGood = sleepHrs >= 7.5;
+        const habitsCount = getCoreHabitsCompletedCount();
+        const habitsAllDone = habitsCount >= 3;
+
+        if (skinInfo.isComplete && sleepGood && habitsAllDone) {
+          return 100;
+        }
+
+        const skinPart = (skinInfo.count / 3) * 34;
+        const sleepPart = Math.min(1, sleepHrs / 7.5) * 33;
+        const habitsPart = (habitsCount / 3) * 33;
+        return Math.min(99, Math.round(skinPart + sleepPart + habitsPart));
+      }
+
+      function renderSevenDayAverages(updates) {
+        const list = Array.isArray(updates) ? updates : [];
+        const cycleBadge = document.getElementById('weekly-seven-day-cycle-badge');
+        const avgPctEl = document.getElementById('weekly-avg-pct');
+        const avgSleepEl = document.getElementById('weekly-avg-sleep');
+        const avgWaterEl = document.getElementById('weekly-avg-water');
+        const avgHabitsEl = document.getElementById('weekly-avg-habits');
+        const bucketsEl = document.getElementById('weekly-seven-day-buckets');
+
+        if (list.length === 0) {
+          if (cycleBadge) cycleBadge.textContent = '0 Rows';
+          if (avgPctEl) avgPctEl.textContent = '0%';
+          if (avgSleepEl) avgSleepEl.textContent = '0.0h';
+          if (avgWaterEl) avgWaterEl.textContent = '0.00 L';
+          if (avgHabitsEl) avgHabitsEl.textContent = '0.0/3 • 0.0/3';
+          if (bucketsEl) bucketsEl.innerHTML = '';
+          return;
+        }
+
+        const count = list.length;
+        const sumPct = list.reduce(function (acc, item) { return acc + (Number(item.percentage) || 0); }, 0);
+        const sumSleep = list.reduce(function (acc, item) { return acc + (Number(item.sleepHours) || 0); }, 0);
+        const sumWater = list.reduce(function (acc, item) { return acc + (Number(item.waterLiters) || 0); }, 0);
+        const sumSkin = list.reduce(function (acc, item) { return acc + (Number(item.skincareCount) || 0); }, 0);
+        const sumHabits = list.reduce(function (acc, item) { return acc + (Number(item.habitsCompleted) || 0); }, 0);
+
+        if (cycleBadge) {
+          cycleBadge.textContent = count + (count === 1 ? ' Row' : ' Rows') + ' • ' + Math.ceil(count / 7) + 'x 7d';
+        }
+        if (avgPctEl) avgPctEl.textContent = Math.round(sumPct / count) + '%';
+        if (avgSleepEl) avgSleepEl.textContent = (sumSleep / count).toFixed(1) + 'h';
+        if (avgWaterEl) avgWaterEl.textContent = (sumWater / count).toFixed(2) + ' L';
+        if (avgHabitsEl) {
+          avgHabitsEl.textContent = (sumSkin / count).toFixed(1) + '/3 • ' + (sumHabits / count).toFixed(1) + '/3';
+        }
+
+        const chronological = list.slice().reverse();
+        if (bucketsEl) {
+          bucketsEl.innerHTML = '';
+          for (let i = 0; i < chronological.length; i += 7) {
+            const chunk = chronological.slice(i, i + 7);
+            const blockNum = Math.floor(i / 7) + 1;
+            const bPct = Math.round(chunk.reduce(function (s, x) { return s + (Number(x.percentage) || 0); }, 0) / chunk.length);
+            const bSleep = (chunk.reduce(function (s, x) { return s + (Number(x.sleepHours) || 0); }, 0) / chunk.length).toFixed(1);
+            const bWater = (chunk.reduce(function (s, x) { return s + (Number(x.waterLiters) || 0); }, 0) / chunk.length).toFixed(2);
+
+            const row = document.createElement('div');
+            row.className = 'px-2.5 py-1.5 rounded-xl bg-white border border-[#e7dccb] flex items-center justify-between gap-2 text-[11px]';
+            row.innerHTML = `
+              <span class="font-extrabold text-[#854d0e]">7-Day Block #${blockNum} (${chunk.length})</span>
+              <span class="font-bold text-[#3b232d]">${bSleep}h • ${bWater}L</span>
+              <span class="font-extrabold text-[#9d174d]">Avg ${bPct}%</span>
+            `;
+            bucketsEl.appendChild(row);
+          }
+        }
+      }
+
+      function renderWeeklyUpdaterSection() {
+        const skinInfo = getSkincareStatusInfo();
+        const sleepHrs = Math.max(0, Number(appState.sleepHours) || 0);
+        const sleepGood = sleepHrs >= 7.5;
+        const habitsCount = getCoreHabitsCompletedCount();
+        const waterVal = Math.max(0, Number(appState.waterLiters) || 0);
+        const pct = calculateCompletionPercentage();
+
+        const liveBadge = document.getElementById('weekly-live-pct-badge');
+        const liveSkin = document.getElementById('weekly-live-skin');
+        const liveSleep = document.getElementById('weekly-live-sleep');
+        const liveHabits = document.getElementById('weekly-live-habits');
+        const liveWater = document.getElementById('weekly-live-water');
+
+        if (liveBadge) {
+          liveBadge.textContent = pct + '%';
+          liveBadge.className = pct === 100
+            ? 'px-3 py-1 rounded-full bg-[#9d174d] text-white text-xs font-extrabold'
+            : 'px-3 py-1 rounded-full bg-[#fdf2f6] border border-[#f4c2da] text-xs font-extrabold text-[#9d174d]';
+        }
+        if (liveSkin) {
+          liveSkin.textContent = skinInfo.count + '/3';
+        }
+        if (liveSleep) {
+          liveSleep.textContent = sleepHrs.toFixed(1) + 'h ' + (sleepGood ? '✓' : '');
+        }
+        if (liveHabits) {
+          liveHabits.textContent = habitsCount + '/3';
+        }
+        if (liveWater) {
+          liveWater.textContent = waterVal.toFixed(2) + ' L';
+        }
+
+        const listEl = document.getElementById('weekly-updates-list');
+        const countEl = document.getElementById('weekly-updates-count');
+        const updates = Array.isArray(appState.weeklyUpdates) ? appState.weeklyUpdates : [];
+
+        renderSevenDayAverages(updates);
+
+        if (countEl) {
+          countEl.textContent = updates.length + (updates.length === 1 ? ' saved' : ' saved');
+        }
+
+        if (!listEl) return;
+        listEl.innerHTML = '';
+
+        if (updates.length === 0) {
+          const empty = document.createElement('p');
+          empty.className = 'text-xs text-center text-[#7c5866] py-3.5 hydrafi-beige-box';
+          empty.textContent = 'No weekly snapshots saved yet.';
+          listEl.appendChild(empty);
+          return;
+        }
+
+        updates.forEach(function (entry) {
+          const card = document.createElement('div');
+          card.className = 'p-3 rounded-2xl border border-[#e7dccb] bg-white space-y-1.5';
+
+          const topRow = document.createElement('div');
+          topRow.className = 'flex items-center justify-between gap-2';
+          topRow.innerHTML = `
+            <div class="min-w-0">
+              <p class="text-xs font-extrabold text-[#3b232d] truncate">${escapeHtml(entry.label)}</p>
+              <p class="text-[11px] text-[#7c5866]">
+                Skin: <span class="font-bold text-[#3b232d]">${entry.skincareCount}/3</span> •
+                Sleep: <span class="font-bold text-[#3b232d]">${Number(entry.sleepHours || 0).toFixed(1)}h</span> •
+                Habits: <span class="font-bold text-[#3b232d]">${entry.habitsCompleted}/3</span> •
+                Water: <span class="font-bold text-[#9d174d]">${Number(entry.waterLiters || 0).toFixed(2)}L</span>
+              </p>
+            </div>
+          `;
+
+          const rightGroup = document.createElement('div');
+          rightGroup.className = 'flex items-center gap-1.5 shrink-0';
+
+          const pctTag = document.createElement('span');
+          const entryPct = Math.min(100, Math.max(0, Number(entry.percentage) || 0));
+          pctTag.className = entryPct === 100
+            ? 'px-2.5 py-1 rounded-lg bg-[#9d174d] text-white text-xs font-extrabold'
+            : 'px-2.5 py-1 rounded-lg bg-[#fdf2f6] border border-[#f4c2da] text-[#9d174d] text-xs font-extrabold';
+          pctTag.textContent = entryPct + '%';
+
+          const delBtn = document.createElement('button');
+          delBtn.type = 'button';
+          delBtn.className = 'hydrafi-pill-btn px-2 py-1 rounded-lg bg-[#faf6f0] border border-[#e7dccb] text-[#9d174d] text-[11px] font-bold';
+          delBtn.textContent = 'Delete';
+          delBtn.addEventListener('click', function () {
+            deleteWeeklyUpdate(entry.id);
+          });
+
+          rightGroup.appendChild(pctTag);
+          rightGroup.appendChild(delBtn);
+          topRow.appendChild(rightGroup);
+          card.appendChild(topRow);
+          listEl.appendChild(card);
+        });
+      }
+
+      function saveWeeklySnapshot() {
+        const labelInput = document.getElementById('weekly-label-input');
+        const customLabel = labelInput ? labelInput.value.trim() : '';
+        const defaultLabel = (function () {
+          try {
+            return 'Snapshot • ' + new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+          } catch (err) {
+            return 'Snapshot #' + ((appState.weeklyUpdates ? appState.weeklyUpdates.length : 0) + 1);
+          }
+        })();
+
+        const skinInfo = getSkincareStatusInfo();
+        const sleepHrs = Math.max(0, Number(appState.sleepHours) || 0);
+        const habitsCount = getCoreHabitsCompletedCount();
+        const waterVal = Math.max(0, Number(appState.waterLiters) || 0);
+        const pct = calculateCompletionPercentage();
+
+        if (!Array.isArray(appState.weeklyUpdates)) {
+          appState.weeklyUpdates = [];
+        }
+
+        appState.weeklyUpdates.unshift({
+          id: 'wk_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+          label: customLabel || defaultLabel,
+          waterLiters: Number(waterVal.toFixed(2)),
+          sleepHours: Number(sleepHrs.toFixed(1)),
+          skincareCount: skinInfo.count,
+          habitsCompleted: habitsCount,
+          percentage: pct
+        });
+
+        if (labelInput) labelInput.value = '';
+        saveStateSafely();
+        renderWeeklyUpdaterSection();
+      }
+
+      function deleteWeeklyUpdate(updateId) {
+        appState.weeklyUpdates = (appState.weeklyUpdates || []).filter(function (item) {
+          return item.id !== updateId;
+        });
+        saveStateSafely();
+        renderWeeklyUpdaterSection();
+      }
+
+      function setSleepHours(hrs) {
+        const num = Number(hrs);
+        if (!isFinite(num) || num < 0 || num > 16) {
+          showTopAlert('Invalid Hours', 'Enter sleep hours between 0 and 16.');
+          return;
+        }
+        appState.sleepHours = Number(num.toFixed(1));
+        saveStateSafely();
+        renderGoalsSection();
+      }
+
+      function toggleMealWalk(mealKey) {
+        if (['breakfast', 'lunch', 'dinner'].indexOf(mealKey) < 0) return;
+        appState.mealWalks[mealKey] = !Boolean(appState.mealWalks[mealKey]);
+        saveStateSafely();
+        renderGoalsSection();
+      }
+
+      function toggleNoSugar() {
+        appState.noSugarWholeDay = !Boolean(appState.noSugarWholeDay);
+        saveStateSafely();
+        renderGoalsSection();
+      }
+
+      function toggleDailyMovement() {
+        appState.dailyMovementDone = !Boolean(appState.dailyMovementDone);
+        if (appState.dailyMovementDone) {
+          appState.timerCompleted = true;
+        }
+        saveStateSafely();
+        renderGoalsSection();
+        renderTimerSection();
+      }
+
+      function addCustomGoal() {
+        const input = document.getElementById('new-custom-goal-input');
+        if (!input) return;
+        const text = input.value.trim();
+        if (!text) return;
+
+        appState.customGoals.push({
+          id: 'cg_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+          text: text,
+          done: false
+        });
+        input.value = '';
+        saveStateSafely();
+        renderGoalsSection();
+      }
+
+      function toggleCustomGoal(goalId) {
+        appState.customGoals = appState.customGoals.map(function (g) {
+          if (g.id === goalId) {
+            return { id: g.id, text: g.text, done: !g.done };
+          }
+          return g;
+        });
+        saveStateSafely();
+        renderGoalsSection();
+      }
+
+      function deleteCustomGoal(goalId) {
+        appState.customGoals = appState.customGoals.filter(function (g) {
+          return g.id !== goalId;
+        });
+        saveStateSafely();
+        renderGoalsSection();
+      }
+
+      function resetDailyGoals() {
+        appState.skincareSteps = { step1: false, step2: false, step3: false };
+        appState.sleepHours = 0;
+        appState.mealWalks = { breakfast: false, lunch: false, dinner: false };
+        appState.noSugarWholeDay = false;
+        appState.dailyMovementDone = false;
+        appState.timerCompleted = false;
+        appState.customGoals = appState.customGoals.map(function (g) {
+          return { id: g.id, text: g.text, done: false };
+        });
+        saveStateSafely();
+        renderGoalsSection();
+        renderTimerSection();
+      }
+
+      function createCustomChallenge14() {
+        const input = document.getElementById('new-challenge-title-input');
+        if (!input) return;
+        const title = input.value.trim();
+        if (!title) return;
+
+        if (!Array.isArray(appState.customChallenges14)) {
+          appState.customChallenges14 = [];
+        }
+        appState.customChallenges14.unshift(createNewChallenge14Obj(title));
+        input.value = '';
+        saveStateSafely();
+        renderCustomChallenges14();
+      }
+
+      function toggleCustomChallengeDay(challengeId, dayNum) {
+        appState.customChallenges14 = (appState.customChallenges14 || []).map(function (ch) {
+          if (ch.id !== challengeId) return ch;
+          return {
+            id: ch.id,
+            title: ch.title,
+            days: ch.days.map(function (d) {
+              if (d.day === dayNum) {
+                return { day: d.day, done: !Boolean(d.done) };
+              }
+              return d;
+            })
+          };
+        });
+        saveStateSafely();
+        renderCustomChallenges14();
+      }
+
+      function resetCustomChallenge14(challengeId) {
+        appState.customChallenges14 = (appState.customChallenges14 || []).map(function (ch) {
+          if (ch.id !== challengeId) return ch;
+          return {
+            id: ch.id,
+            title: ch.title,
+            days: ch.days.map(function (d) {
+              return { day: d.day, done: false };
+            })
+          };
+        });
+        saveStateSafely();
+        renderCustomChallenges14();
+      }
+
+      function deleteCustomChallenge14(challengeId) {
+        appState.customChallenges14 = (appState.customChallenges14 || []).filter(function (ch) {
+          return ch.id !== challengeId;
+        });
+        saveStateSafely();
+        renderCustomChallenges14();
+      }
+
+      function renderCustomChallenges14() {
+        const listEl = document.getElementById('custom-challenges-14-list');
+        const countBadge = document.getElementById('challenges-count-badge');
+        if (!listEl) return;
+
+        const challenges = Array.isArray(appState.customChallenges14) ? appState.customChallenges14 : [];
+        if (countBadge) {
+          countBadge.textContent = challenges.length + ' Active';
+        }
+
+        listEl.innerHTML = '';
+        if (challenges.length === 0) {
+          const empty = document.createElement('p');
+          empty.className = 'text-xs text-center text-[#7c5866] py-4 hydrafi-beige-box';
+          empty.textContent = 'No 14-day challenges yet.';
+          listEl.appendChild(empty);
+          return;
+        }
+
+        challenges.forEach(function (ch) {
+          const doneDays = ch.days.filter(function (d) { return Boolean(d.done); }).length;
+          const pct = Math.round((doneDays / 14) * 100);
+
+          const card = document.createElement('div');
+          card.className = 'p-3.5 rounded-2xl border border-[#f0d7e3] bg-[#fdf2f6]/60 space-y-3';
+
+          const header = document.createElement('div');
+          header.className = 'flex items-start justify-between gap-2';
+          header.innerHTML = `
+            <div class="min-w-0">
+              <p class="text-sm font-extrabold text-[#9d174d] break-words">${escapeHtml(ch.title)}</p>
+              <p class="text-[11px] font-semibold text-[#854d0e] mt-0.5">${doneDays} / 14 Days (${pct}%)</p>
+            </div>
+          `;
+
+          const btnGroup = document.createElement('div');
+          btnGroup.className = 'flex items-center gap-1.5 shrink-0';
+
+          const resetBtn = document.createElement('button');
+          resetBtn.type = 'button';
+          resetBtn.className = 'hydrafi-pill-btn px-2.5 py-1 rounded-lg bg-white border border-[#e7dccb] text-[#854d0e] text-[11px] font-bold';
+          resetBtn.textContent = 'Reset';
+          resetBtn.addEventListener('click', function () {
+            resetCustomChallenge14(ch.id);
+          });
+
+          const delBtn = document.createElement('button');
+          delBtn.type = 'button';
+          delBtn.className = 'hydrafi-pill-btn px-2.5 py-1 rounded-lg bg-white border border-[#f4c2da] text-[#9d174d] text-[11px] font-bold';
+          delBtn.textContent = 'Delete';
+          delBtn.addEventListener('click', function () {
+            deleteCustomChallenge14(ch.id);
+          });
+
+          btnGroup.appendChild(resetBtn);
+          btnGroup.appendChild(delBtn);
+          header.appendChild(btnGroup);
+
+          const barWrap = document.createElement('div');
+          barWrap.className = 'w-full h-2 rounded-full bg-[#f3ece2] overflow-hidden border border-[#e7dccb]';
+          barWrap.innerHTML = `<div class="h-full bg-[#f472b6] transition-all duration-300" style="width: ${pct}%;"></div>`;
+
+          const grid = document.createElement('div');
+          grid.className = 'grid grid-cols-7 gap-1.5';
+
+          ch.days.forEach(function (dayItem) {
+            const dBtn = document.createElement('button');
+            dBtn.type = 'button';
+            dBtn.className = dayItem.done
+              ? 'hydrafi-pill-btn py-2 rounded-xl bg-[#f472b6] border border-[#f472b6] text-white text-xs font-extrabold text-center'
+              : 'hydrafi-pill-btn py-2 rounded-xl bg-white border border-[#e7dccb] text-[#3b232d] hover:border-[#f472b6] text-xs font-bold text-center';
+            dBtn.textContent = 'D' + dayItem.day;
+            dBtn.setAttribute('aria-pressed', dayItem.done ? 'true' : 'false');
+            dBtn.addEventListener('click', function () {
+              toggleCustomChallengeDay(ch.id, dayItem.day);
+            });
+            grid.appendChild(dBtn);
+          });
+
+          card.appendChild(header);
+          card.appendChild(barWrap);
+          card.appendChild(grid);
+          listEl.appendChild(card);
+        });
+      }
+
+      function renderGoalsSection() {
+        const skinInfo = getSkincareStatusInfo();
+        const careBadge = document.getElementById('skincare-badge');
+        if (careBadge) careBadge.textContent = skinInfo.count + '/3';
+
+        const stepsConfig = [
+          { key: 'step1', id: 'glow-step-1', label: '1. Cleanse' },
+          { key: 'step2', id: 'glow-step-2', label: '2. Glow Serum' },
+          { key: 'step3', id: 'glow-step-3', label: '3. Moisturize / SPF' }
+        ];
+        stepsConfig.forEach(function (item) {
+          const btn = document.getElementById(item.id);
+          if (!btn) return;
+          const active = Boolean(appState.skincareSteps && appState.skincareSteps[item.key]);
+          btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+          btn.textContent = (active ? '✓ ' : '') + item.label;
+          btn.className = active
+            ? 'hydrafi-pill-btn py-2.5 px-2 rounded-xl text-[11px] font-bold border text-center leading-tight bg-[#f472b6] border-[#f472b6] text-white'
+            : 'hydrafi-pill-btn py-2.5 px-2 rounded-xl text-[11px] font-bold border text-center leading-tight bg-white border-[#e7dccb] text-[#3b232d] hover:border-[#f472b6]';
+        });
+
+        const sleepHrs = Number(appState.sleepHours) || 0;
+        const sleepBadge = document.getElementById('sleep-hours-badge');
+        if (sleepBadge) {
+          sleepBadge.textContent = sleepHrs.toFixed(1) + 'h';
+        }
+        document.querySelectorAll('.sleep-preset-btn').forEach(function (btn) {
+          const val = Number(btn.getAttribute('data-sleep-hrs'));
+          if (Math.abs(val - sleepHrs) < 0.01) {
+            btn.className = 'sleep-preset-btn hydrafi-pill-btn py-1.5 rounded-lg bg-[#f472b6] border border-[#f472b6] text-[11px] font-bold text-white';
+          } else {
+            btn.className = 'sleep-preset-btn hydrafi-pill-btn py-1.5 rounded-lg bg-white border border-[#e7dccb] text-[11px] font-bold text-[#3b232d]';
+          }
+        });
+
+        const mealCount =
+          (appState.mealWalks.breakfast ? 1 : 0) +
+          (appState.mealWalks.lunch ? 1 : 0) +
+          (appState.mealWalks.dinner ? 1 : 0);
+
+        const mealBadge = document.getElementById('meal-walk-badge');
+        if (mealBadge) mealBadge.textContent = mealCount + '/3';
+
+        ['breakfast', 'lunch', 'dinner'].forEach(function (meal) {
+          const pill = document.getElementById('meal-pill-' + meal);
+          if (!pill) return;
+          const active = Boolean(appState.mealWalks[meal]);
+          const label = meal.charAt(0).toUpperCase() + meal.slice(1);
+          pill.textContent = (active ? 'Done: ' : '') + label;
+          pill.className = active
+            ? 'hydrafi-pill-btn py-2 px-2 rounded-xl text-xs font-bold border text-center bg-[#f472b6] border-[#f472b6] text-white'
+            : 'hydrafi-pill-btn py-2 px-2 rounded-xl text-xs font-bold border text-center bg-white border-[#e7dccb] text-[#3b232d] hover:border-[#f472b6]';
+        });
+
+        const sugarBtn = document.getElementById('goal-no-sugar-btn');
+        const sugarStatus = document.getElementById('goal-no-sugar-status');
+        if (sugarBtn && sugarStatus) {
+          if (appState.noSugarWholeDay) {
+            sugarBtn.className = 'hydrafi-pill-btn w-full p-3.5 rounded-2xl border border-[#f472b6] bg-[#fdf2f6] text-left flex items-center justify-between gap-3 mb-3';
+            sugarStatus.textContent = 'Completed';
+            sugarStatus.className = 'px-2.5 py-1 rounded-lg text-xs font-bold bg-[#9d174d] text-white shrink-0';
+          } else {
+            sugarBtn.className = 'hydrafi-pill-btn w-full p-3.5 rounded-2xl border border-[#e7dccb] bg-white hover:border-[#f472b6] text-left flex items-center justify-between gap-3 mb-3';
+            sugarStatus.textContent = 'Pending';
+            sugarStatus.className = 'px-2.5 py-1 rounded-lg text-xs font-bold bg-[#f3ece2] text-[#854d0e] shrink-0';
+          }
+        }
+
+        const moveBtn = document.getElementById('goal-movement-btn');
+        const moveStatus = document.getElementById('goal-movement-status');
+        if (moveBtn && moveStatus) {
+          if (appState.dailyMovementDone) {
+            moveBtn.className = 'hydrafi-pill-btn w-full p-3.5 rounded-2xl border border-[#f472b6] bg-[#fdf2f6] text-left flex items-center justify-between gap-3 mb-4';
+            moveStatus.textContent = 'Completed';
+            moveStatus.className = 'px-2.5 py-1 rounded-lg text-xs font-bold bg-[#9d174d] text-white shrink-0';
+          } else {
+            moveBtn.className = 'hydrafi-pill-btn w-full p-3.5 rounded-2xl border border-[#e7dccb] bg-white hover:border-[#f472b6] text-left flex items-center justify-between gap-3 mb-4';
+            moveStatus.textContent = 'Pending';
+            moveStatus.className = 'px-2.5 py-1 rounded-lg text-xs font-bold bg-[#f3ece2] text-[#854d0e] shrink-0';
+          }
+        }
+
+        const customListEl = document.getElementById('custom-goals-list');
+        if (customListEl) {
+          customListEl.innerHTML = '';
+          appState.customGoals.forEach(function (goal) {
+            const row = document.createElement('div');
+            row.className = goal.done
+              ? 'p-3 rounded-2xl border border-[#f472b6] bg-[#fdf2f6] flex items-center justify-between gap-2'
+              : 'p-3 rounded-2xl border border-[#e7dccb] bg-[#faf6f0] flex items-center justify-between gap-2';
+
+            const toggleBtn = document.createElement('button');
+            toggleBtn.type = 'button';
+            toggleBtn.className = 'hydrafi-pill-btn flex-1 text-left flex items-center justify-between gap-2 min-w-0';
+            toggleBtn.innerHTML = `
+              <span class="text-xs font-bold truncate ${goal.done ? 'line-through text-[#7c5866]' : 'text-[#3b232d]'}">${escapeHtml(goal.text)}</span>
+              <span class="px-2 py-0.5 rounded-md text-[11px] font-bold shrink-0 ${goal.done ? 'bg-[#9d174d] text-white' : 'bg-white border border-[#e7dccb] text-[#854d0e]'}">${goal.done ? 'Done' : 'Mark'}</span>
+            `;
+            toggleBtn.addEventListener('click', function () {
+              toggleCustomGoal(goal.id);
+            });
+
+            const delBtn = document.createElement('button');
+            delBtn.type = 'button';
+            delBtn.setAttribute('aria-label', 'Delete custom goal');
+            delBtn.className = 'hydrafi-pill-btn px-2.5 py-1.5 rounded-xl bg-white border border-[#e7dccb] hover:border-[#f472b6] text-[#9d174d] text-xs font-bold shrink-0';
+            delBtn.textContent = 'Delete';
+            delBtn.addEventListener('click', function () {
+              deleteCustomGoal(goal.id);
+            });
+
+            row.appendChild(toggleBtn);
+            row.appendChild(delBtn);
+            customListEl.appendChild(row);
+          });
+        }
+
+        const totalDone =
+          mealCount +
+          (appState.noSugarWholeDay ? 1 : 0) +
+          (appState.dailyMovementDone ? 1 : 0) +
+          appState.customGoals.filter(function (g) { return g.done; }).length;
+
+        const totalPossible = 5 + appState.customGoals.length;
+        const summaryPill = document.getElementById('goals-summary-pill');
+        if (summaryPill) {
+          summaryPill.textContent = totalDone + ' / ' + totalPossible + ' Done';
+        }
+
+        const pct = calculateCompletionPercentage();
+        const glowPill = document.getElementById('glow-score-pill');
+        if (glowPill) {
+          glowPill.textContent = pct + '%';
+        }
+
+        renderCustomChallenges14();
+        renderWeeklyUpdaterSection();
+      }
+
+      // =====================================================================
+      // EVENT BINDING & INITIALIZATION
+      // =====================================================================
+      function bindEvents() {
+        // Entry / Login Gate form & Enter key handling
+        const gateForm = document.getElementById('gate-login-form');
+        const gateInput = document.getElementById('gate-name-input');
+        const enterBtn = document.getElementById('enter-hydrafi-btn');
+
+        if (gateForm) {
+          gateForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            submitGateName(gateInput ? gateInput.value : '');
+          });
+        }
+        if (enterBtn) {
+          enterBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            submitGateName(gateInput ? gateInput.value : '');
+          });
+        }
+        if (gateInput) {
+          ['keydown', 'keyup'].forEach(function (evName) {
+            gateInput.addEventListener(evName, function (e) {
+              if (e.key === 'Enter' || e.keyCode === 13 || e.which === 13) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (evName === 'keydown') {
+                  submitGateName(gateInput.value);
+                }
+              }
+            });
+          });
+        }
+
+        // Top Edit Name drawer
+        const editNameBtn = document.getElementById('edit-name-btn');
+        const editNameDrawer = document.getElementById('edit-name-drawer');
+        const saveInlineNameBtn = document.getElementById('save-inline-name-btn');
+        const inlineNameInput = document.getElementById('inline-name-input');
+
+        if (editNameBtn && editNameDrawer) {
+          editNameBtn.addEventListener('click', function () {
+            editNameDrawer.classList.toggle('hidden');
+            if (!editNameDrawer.classList.contains('hidden') && inlineNameInput) {
+              inlineNameInput.focus();
+            }
+          });
+        }
+        if (saveInlineNameBtn) {
+          saveInlineNameBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            saveInlineName();
+          });
+        }
+        if (inlineNameInput) {
+          inlineNameInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.keyCode === 13 || e.which === 13) {
+              e.preventDefault();
+              saveInlineName();
+            }
+          });
+        }
+
+        // Top Alert Banner
+        const testAlertBtn = document.getElementById('test-alert-btn');
+        const dismissAlertBtn = document.getElementById('dismiss-alert-btn');
+        if (testAlertBtn) {
+          testAlertBtn.addEventListener('click', function () {
+            showTopAlert(
+              'HydraFit Check',
+              'Water: ' + appState.waterLiters.toFixed(2) + ' L / ' + appState.waterGoalLiters.toFixed(2) + ' L'
+            );
+          });
+        }
+        if (dismissAlertBtn) {
+          dismissAlertBtn.addEventListener('click', hideTopAlert);
+        }
+
+        // Bottom 3 Navigation Tabs
+        const tabMap = {
+          'nav-tab-water': 'water',
+          'nav-tab-workouts': 'workouts',
+          'nav-tab-challenges': 'challenges'
+        };
+        Object.keys(tabMap).forEach(function (btnId) {
+          const el = document.getElementById(btnId);
+          if (el) {
+            el.addEventListener('click', function () {
+              switchTab(tabMap[btnId]);
+            });
+          }
+        });
+
+        // Water Controls
+        const toggleGoalBtn = document.getElementById('toggle-goal-editor-btn');
+        const closeGoalBtn = document.getElementById('close-goal-editor-btn');
+        const goalPanel = document.getElementById('goal-editor-panel');
+        if (toggleGoalBtn && goalPanel) {
+          toggleGoalBtn.addEventListener('click', function () {
+            goalPanel.classList.toggle('hidden');
+          });
+        }
+        if (closeGoalBtn && goalPanel) {
+          closeGoalBtn.addEventListener('click', function () {
+            goalPanel.classList.add('hidden');
+          });
+        }
+
+        const applyWeightGoalBtn = document.getElementById('apply-weight-goal-btn');
+        const weightCalcInput = document.getElementById('weight-calc-input');
+        if (applyWeightGoalBtn && weightCalcInput) {
+          applyWeightGoalBtn.addEventListener('click', function () {
+            applyWeightSuggestedGoal(weightCalcInput.value);
+          });
+        }
+
+        const toggleReminderEditBtn = document.getElementById('toggle-reminder-edit-btn');
+        const reminderEditPanel = document.getElementById('reminder-edit-panel');
+        if (toggleReminderEditBtn && reminderEditPanel) {
+          toggleReminderEditBtn.addEventListener('click', function () {
+            reminderEditPanel.classList.toggle('hidden');
+          });
+        }
+
+        document.querySelectorAll('.reminder-preset-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            setWaterReminderMinutes(btn.getAttribute('data-reminder-min'));
+          });
+        });
+
+        const saveReminderMinBtn = document.getElementById('save-reminder-min-btn');
+        const customReminderMinInput = document.getElementById('custom-reminder-min-input');
+        if (saveReminderMinBtn && customReminderMinInput) {
+          saveReminderMinBtn.addEventListener('click', function () {
+            setWaterReminderMinutes(customReminderMinInput.value);
+            customReminderMinInput.value = '';
+          });
+          customReminderMinInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.keyCode === 13) {
+              e.preventDefault();
+              setWaterReminderMinutes(customReminderMinInput.value);
+              customReminderMinInput.value = '';
+            }
+          });
+        }
+
+        const toggleReminderBtn = document.getElementById('toggle-water-reminder-btn');
+        if (toggleReminderBtn) {
+          toggleReminderBtn.addEventListener('click', toggleWaterReminder);
+        }
+
+        document.querySelectorAll('.preset-goal-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            setWaterGoal(btn.getAttribute('data-preset-goal'));
+          });
+        });
+
+        const saveCustomGoalBtn = document.getElementById('save-custom-goal-btn');
+        const customGoalInput = document.getElementById('custom-goal-input');
+        if (saveCustomGoalBtn && customGoalInput) {
+          saveCustomGoalBtn.addEventListener('click', function () {
+            setWaterGoal(customGoalInput.value);
+            customGoalInput.value = '';
+          });
+        }
+
+        document.querySelectorAll('.quick-water-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            addWaterLiters(btn.getAttribute('data-add-liters'));
+          });
+        });
+
+        const addCustomWaterBtn = document.getElementById('add-custom-water-btn');
+        const customWaterInput = document.getElementById('custom-water-add-input');
+        if (addCustomWaterBtn && customWaterInput) {
+          addCustomWaterBtn.addEventListener('click', function () {
+            addWaterLiters(customWaterInput.value);
+            customWaterInput.value = '';
+          });
+        }
+
+        const undoWaterBtn = document.getElementById('undo-water-btn');
+        const resetWaterBtn = document.getElementById('reset-water-btn');
+        if (undoWaterBtn) undoWaterBtn.addEventListener('click', undoLastWaterLog);
+        if (resetWaterBtn) resetWaterBtn.addEventListener('click', resetTodayWater);
+
+        // Workout Controls
+        const modeWorkoutBtn = document.getElementById('mode-workout-btn');
+        const modeWalkBtn = document.getElementById('mode-walk-btn');
+        const startPauseBtn = document.getElementById('timer-start-pause-btn');
+        const resetTimerBtn = document.getElementById('timer-reset-btn');
+        const completeTimerBtn = document.getElementById('timer-complete-btn');
+        const femaleBtn = document.getElementById('gender-female-btn');
+        const maleBtn = document.getElementById('gender-male-btn');
+        const addExerciseBtn = document.getElementById('add-custom-exercise-btn');
+        const newExerciseNameInput = document.getElementById('new-exercise-name-input');
+        const resetCatBtn = document.getElementById('reset-category-exercises-btn');
+
+        if (modeWorkoutBtn) {
+          modeWorkoutBtn.addEventListener('click', function () { setTimerMode('30-Min Workout'); });
+        }
+        if (modeWalkBtn) {
+          modeWalkBtn.addEventListener('click', function () { setTimerMode('30-Min Brisk Walk'); });
+        }
+        if (startPauseBtn) startPauseBtn.addEventListener('click', toggleStartPauseTimer);
+        if (resetTimerBtn) resetTimerBtn.addEventListener('click', resetTimer);
+        if (completeTimerBtn) completeTimerBtn.addEventListener('click', markThirtyMinComplete);
+        if (femaleBtn) {
+          femaleBtn.addEventListener('click', function () { setGenderFocus('Female'); });
+        }
+        if (maleBtn) {
+          maleBtn.addEventListener('click', function () { setGenderFocus('Male'); });
+        }
+        if (addExerciseBtn) {
+          addExerciseBtn.addEventListener('click', addExerciseToActiveCategory);
+        }
+        if (newExerciseNameInput) {
+          newExerciseNameInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.keyCode === 13) {
+              e.preventDefault();
+              addExerciseToActiveCategory();
+            }
+          });
+        }
+        if (resetCatBtn) {
+          resetCatBtn.addEventListener('click', restoreDefaultExercisesForActiveCategory);
+        }
+
+        // Challenges & Weekly Updater Controls
+        [
+          { key: 'step1', id: 'glow-step-1' },
+          { key: 'step2', id: 'glow-step-2' },
+          { key: 'step3', id: 'glow-step-3' }
+        ].forEach(function (item) {
+          const btn = document.getElementById(item.id);
+          if (btn) {
+            btn.addEventListener('click', function () {
+              toggleSkincareStep(item.key);
+            });
+          }
+        });
+
+        document.querySelectorAll('.sleep-preset-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            setSleepHours(btn.getAttribute('data-sleep-hrs'));
+          });
+        });
+
+        const saveSleepBtn = document.getElementById('save-sleep-btn');
+        const customSleepInput = document.getElementById('custom-sleep-input');
+        if (saveSleepBtn && customSleepInput) {
+          saveSleepBtn.addEventListener('click', function () {
+            setSleepHours(customSleepInput.value);
+            customSleepInput.value = '';
+          });
+        }
+
+        ['breakfast', 'lunch', 'dinner'].forEach(function (meal) {
+          const pill = document.getElementById('meal-pill-' + meal);
+          if (pill) {
+            pill.addEventListener('click', function () {
+              toggleMealWalk(meal);
+            });
+          }
+        });
+
+        const noSugarBtn = document.getElementById('goal-no-sugar-btn');
+        const moveBtn = document.getElementById('goal-movement-btn');
+        const addGoalBtn = document.getElementById('add-custom-goal-btn');
+        const newGoalInput = document.getElementById('new-custom-goal-input');
+        const resetGoalsBtn = document.getElementById('reset-daily-goals-btn');
+        const createChallengeBtn = document.getElementById('create-challenge-14-btn');
+        const newChallengeInput = document.getElementById('new-challenge-title-input');
+
+        if (noSugarBtn) noSugarBtn.addEventListener('click', toggleNoSugar);
+        if (moveBtn) moveBtn.addEventListener('click', toggleDailyMovement);
+        if (addGoalBtn) addGoalBtn.addEventListener('click', addCustomGoal);
+        if (newGoalInput) {
+          newGoalInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.keyCode === 13) {
+              e.preventDefault();
+              addCustomGoal();
+            }
+          });
+        }
+        if (resetGoalsBtn) resetGoalsBtn.addEventListener('click', resetDailyGoals);
+        if (createChallengeBtn) createChallengeBtn.addEventListener('click', createCustomChallenge14);
+        if (newChallengeInput) {
+          newChallengeInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.keyCode === 13) {
+              e.preventDefault();
+              createCustomChallenge14();
+            }
+          });
+        }
+
+        const saveWeeklyBtn = document.getElementById('save-weekly-update-btn');
+        const weeklyLabelInput = document.getElementById('weekly-label-input');
+        if (saveWeeklyBtn) {
+          saveWeeklyBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            saveWeeklySnapshot();
+          });
+        }
+        if (weeklyLabelInput) {
+          weeklyLabelInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.keyCode === 13) {
+              e.preventDefault();
+              saveWeeklySnapshot();
+            }
+          });
+        }
+      }
+
+      function initApp() {
+        appState = loadStateSafely();
+        waterReminderRemainingSec = getReminderIntervalSeconds();
+
+        const dateLabel = document.getElementById('header-date-label');
+        if (dateLabel) {
+          try {
+            const now = new Date();
+            dateLabel.textContent = WEEKDAY_LONG_NAMES[now.getDay()] + ' • ' + now.toLocaleDateString('en-US', {
+              month: 'short',
+              day: 'numeric'
+            });
+          } catch (err) {
+            dateLabel.textContent = 'Friday';
+          }
+        }
+
+        bindEvents();
+        syncGateAndMainScreens();
+        renderWaterSection();
+        startWaterReminderLoop();
+        renderTimerSection();
+        renderExerciseLibrary();
+        renderGoalsSection();
+        switchTab(appState.activeTab);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initApp);
+      } else {
+        initApp();
+      }
+    })();
+  </script>
+</body>
+</html>
