@@ -12,6 +12,12 @@
     return Uint8Array.from(raw, char => char.charCodeAt(0));
   }
 
+  function getInterval() {
+    const label = document.getElementById("water-interval-label");
+    const match = label?.textContent.match(/\d+/);
+    return match ? Number(match[0]) : 30;
+  }
+
   async function getPublicKey() {
     const response = await fetch(API + "/vapid-public-key");
     if (!response.ok) throw new Error("Could not get public key");
@@ -23,26 +29,33 @@
   }
 
   async function sendSubscription(subscription) {
-    const interval = Number(
-      document.getElementById("water-interval-label")?.textContent
-    ) || 30;
-
     const response = await fetch(API + "/subscribe", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         subscription: subscription.toJSON(),
-        interval_minutes: interval,
+        interval_minutes: getInterval(),
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
           || "Africa/Kinshasa"
       })
     });
 
     if (!response.ok) {
-      throw new Error("Could not save notification subscription");
+      throw new Error("Could not update notification settings");
     }
 
     return response.json();
+  }
+
+  async function syncExistingSubscription() {
+    if (localStorage.getItem("hydrafit_push_enabled") !== "yes") return;
+
+    const registration = await navigator.serviceWorker.ready;
+    const subscription = await registration.pushManager.getSubscription();
+
+    if (subscription) {
+      await sendSubscription(subscription);
+    }
   }
 
   async function enableNotifications(button, status) {
@@ -83,11 +96,15 @@
     const subscription = await registration.pushManager.getSubscription();
 
     if (subscription) {
-      await fetch(API + "/unsubscribe", {
+      const response = await fetch(API + "/unsubscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ endpoint: subscription.endpoint })
       });
+
+      if (!response.ok) {
+        throw new Error("Could not disable notifications on server");
+      }
 
       await subscription.unsubscribe();
     }
@@ -136,6 +153,37 @@
 
     if (localStorage.getItem("hydrafit_push_enabled") === "yes") {
       button.textContent = "Phone Notifications On ✓";
+
+      syncExistingSubscription().catch(error => {
+        status.textContent = error.message;
+      });
+    }
+
+    const intervalLabel = document.getElementById("water-interval-label");
+
+    if (intervalLabel && "MutationObserver" in window) {
+      let lastInterval = getInterval();
+
+      const observer = new MutationObserver(function () {
+        const newInterval = getInterval();
+
+        if (newInterval === lastInterval) return;
+        lastInterval = newInterval;
+
+        syncExistingSubscription()
+          .then(() => {
+            status.textContent = "Reminder interval updated.";
+          })
+          .catch(error => {
+            status.textContent = error.message;
+          });
+      });
+
+      observer.observe(intervalLabel, {
+        childList: true,
+        characterData: true,
+        subtree: true
+      });
     }
   }
 
