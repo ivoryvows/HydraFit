@@ -7,6 +7,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="HydraFit" />
   <meta name="theme-color" content="#fdf2f6" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" href="./icon-180.png" />
   <title>HydraFit</title>
 
   <!-- Tailwind CSS -->
@@ -2802,5 +2805,18 @@
       }
     })();
   </script>
+
+  <script>
+    // HydraFit PWA service-worker registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('./sw.js')
+          .catch(function (error) {
+            console.error('HydraFit service worker registration failed:', error);
+          });
+      });
+    }
+  </script>
+
 </body>
 </html>
