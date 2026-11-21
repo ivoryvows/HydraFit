@@ -1,7 +1,10 @@
-const CACHE_NAME = 'hydrafit-pwa-v1';
+
+const CACHE_NAME = 'hydrafit-pwa-v2';
+
 const APP_SHELL = [
   './',
   './index.html',
+  './push.js',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
@@ -26,7 +29,6 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Keep app navigation fresh; use cached same-origin files when offline.
 self.addEventListener('fetch', (event) => {
   const request = event.request;
   const url = new URL(request.url);
@@ -49,6 +51,7 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(request).then((cached) => {
       if (cached) return cached;
+
       return fetch(request).then((response) => {
         if (response && response.ok) {
           const copy = response.clone();
@@ -60,16 +63,19 @@ self.addEventListener('fetch', (event) => {
   );
 });
 
-// Push handler is ready for the Cloudflare push backend added in the next phase.
 self.addEventListener('push', (event) => {
   let payload = {};
+
   try {
     payload = event.data ? event.data.json() : {};
   } catch (_) {
-    payload = { body: event.data ? event.data.text() : 'Time to drink water!' };
+    payload = {
+      body: event.data ? event.data.text() : 'Time to drink water!'
+    };
   }
 
   const title = payload.title || 'HydraFit Water Reminder';
+
   const options = {
     body: payload.body || 'Time to drink water!',
     icon: './icon-192.png',
@@ -84,6 +90,7 @@ self.addEventListener('push', (event) => {
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
+
   const targetUrl = new URL(
     event.notification.data && event.notification.data.url
       ? event.notification.data.url
